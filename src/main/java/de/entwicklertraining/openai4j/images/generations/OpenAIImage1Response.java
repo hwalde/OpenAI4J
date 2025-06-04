@@ -9,13 +9,13 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Holds the results (image URLs or Base64) returned by DALL·E 3
+ * Holds the results (base64-encoded images) returned by GPT-Image-1
  */
-public final class DallE3Response extends OpenAIResponse<DallE3Request> {
+public final class OpenAIImage1Response extends OpenAIResponse<OpenAIImage1Request> {
 
     private final List<String> images = new ArrayList<>();
 
-    public DallE3Response(String rawBody, DallE3Request request) {
+    public OpenAIImage1Response(String rawBody, OpenAIImage1Request request) {
         super(new JSONObject(rawBody), request);
         parseImages();
     }
@@ -27,11 +27,7 @@ public final class DallE3Response extends OpenAIResponse<DallE3Request> {
         }
         for (int i = 0; i < dataArr.length(); i++) {
             JSONObject entry = dataArr.getJSONObject(i);
-            if (getRequest().responseFormat() == DallE3Request.ResponseFormat.URL) {
-                images.add(entry.getString("url"));
-            } else {
-                images.add(entry.getString("b64_json"));
-            }
+            images.add(entry.getString("b64_json"));
         }
     }
 

@@ -1,6 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
-import de.entwicklertraining.openai4j.GptClient;
+import de.entwicklertraining.openai4j.OpenAIClient;
 import de.entwicklertraining.openai4j.images.generations.DallE3Request;
 import de.entwicklertraining.openai4j.images.generations.DallE3Request.ImageQuality;
 import de.entwicklertraining.openai4j.images.generations.DallE3Request.ImageSize;
@@ -26,8 +26,8 @@ import java.util.List;
 public class DallE3Example {
 
     public static void main(String[] args) throws Exception {
-        // Generate GptClient
-        GptClient client = new GptClient();
+        // Generate OpenAIClient
+        OpenAIClient client = new OpenAIClient();
 
         DallE3Response response = client.images().generations().dalle3()
                 .prompt("A futuristic city floating in the sky, with neon lights")

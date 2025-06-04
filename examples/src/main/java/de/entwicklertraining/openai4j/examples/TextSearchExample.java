@@ -1,7 +1,7 @@
 package de.entwicklertraining.openai4j.examples;
 
-import de.entwicklertraining.openai4j.GptClient;
-import de.entwicklertraining.openai4j.embeddings.GptCosineSimilarity;
+import de.entwicklertraining.openai4j.OpenAIClient;
+import de.entwicklertraining.openai4j.embeddings.OpenAICosineSimilarity;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 
 /**
  * Demonstriert eine semantische Textsuche mit OpenAI-Embeddings
- * unter Verwendung von GptCosineSimilarity.
+ * unter Verwendung von OpenAICosineSimilarity.
  *
  * 1. Wir haben ein paar Dokumente und eine Query als Strings.
- * 2. Für jedes Dokument rufen wir GptCosineSimilarity.similarity(doc, query) auf.
+ * 2. Für jedes Dokument rufen wir OpenAICosineSimilarity.similarity(doc, query) auf.
  * 3. Wir sortieren nach Score und geben die Top-3 Treffer aus.
  */
 public final class TextSearchExample {
@@ -27,9 +27,9 @@ public final class TextSearchExample {
         );
         String query = "Where is the Eiffel Tower?";
 
-        GptClient client = new GptClient();
+        OpenAIClient client = new OpenAIClient();
 
-        GptCosineSimilarity similarity = new GptCosineSimilarity(client); // Default: text-embedding-3-small
+        OpenAICosineSimilarity similarity = new OpenAICosineSimilarity(client); // Default: text-embedding-3-small
 
         var scored = documents.stream()
             .map(doc -> new Result(doc, similarity.similarity(doc, query)))

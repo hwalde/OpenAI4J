@@ -1,7 +1,7 @@
 package de.entwicklertraining.openai4j.images.generations;
 
-import de.entwicklertraining.openai4j.GptClient;
-import de.entwicklertraining.openai4j.GptRequest;
+import de.entwicklertraining.openai4j.OpenAIClient;
+import de.entwicklertraining.openai4j.OpenAIRequest;
 import de.entwicklertraining.api.base.ApiRequestBuilderBase;
 import org.json.JSONObject;
 
@@ -15,7 +15,7 @@ import java.util.Objects;
  *  - Can generate up to 10 images in one request (n up to 10).
  *  - Doesn't support quality or style parameters.
  */
-public final class DallE2Request extends GptRequest<DallE2Response> {
+public final class DallE2Request extends OpenAIRequest<DallE2Response> {
 
     private final String prompt;
     private final ImageSize size;
@@ -63,7 +63,7 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
 
     @Override
     public String getBody() {
-        // Build JSON body (moved here from the old GptDallE2Request)
+        // Build JSON body (moved here from the old OpenAIDallE2Request)
         JSONObject body = new JSONObject();
         body.put("model", "dall-e-2");
         body.put("prompt", prompt);
@@ -75,7 +75,7 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
 
     @Override
     public DallE2Response createResponse(String responseBody) {
-        // Now we create a DallE2Response (which extends GptResponse<DallE2Request>)
+        // Now we create a DallE2Response (which extends OpenAIResponse<DallE2Request>)
         return new DallE2Response(responseBody, this);
     }
 
@@ -101,7 +101,7 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
      * @param client API client used to execute the request
      * @return builder instance
      */
-    public static Builder builder(GptClient client) {
+    public static Builder builder(OpenAIClient client) {
         return new Builder(client);
     }
 
@@ -109,7 +109,7 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
      * Builder class to configure and create a {@link DallE2Request}.
      */
     public static final class Builder extends ApiRequestBuilderBase<Builder, DallE2Request> {
-        private final GptClient client;
+        private final OpenAIClient client;
         private String prompt;
         private ImageSize size = ImageSize.SIZE_512x512;
         private ResponseFormat responseFormat = ResponseFormat.URL;
@@ -117,14 +117,14 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
 
         /**
          * Creates a new builder associated with the given client.
-         * Callers obtain instances via {@link GptClient#dallE2Request()}.
+         * Callers obtain instances via {@link OpenAIClient#dallE2Request()}.
          *
          * @param client API client used to execute the request
          */
         /**
          * Creates a builder bound to the provided client.
          */
-        private Builder(GptClient client) {
+        private Builder(OpenAIClient client) {
             this.client = client;
         }
 

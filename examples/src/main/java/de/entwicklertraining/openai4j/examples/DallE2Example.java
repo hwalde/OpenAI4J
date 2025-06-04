@@ -1,7 +1,7 @@
 package de.entwicklertraining.openai4j.examples;
 
 import de.entwicklertraining.api.base.ApiClientSettings;
-import de.entwicklertraining.openai4j.GptClient;
+import de.entwicklertraining.openai4j.OpenAIClient;
 import de.entwicklertraining.openai4j.images.generations.DallE2Request.ImageSize;
 import de.entwicklertraining.openai4j.images.generations.DallE2Request.ResponseFormat;
 import de.entwicklertraining.openai4j.images.generations.DallE2Response;
@@ -23,8 +23,8 @@ import java.util.List;
 public class DallE2Example {
 
     public static void main(String[] args) throws Exception {
-        // Generate GptClient
-        GptClient client = new GptClient();
+        // Generate OpenAIClient
+        OpenAIClient client = new OpenAIClient();
 
         // Build a DALL·E 2 request with prompt + size + responseFormat + n
         // Then execute -> returns a DallE2Response

@@ -1,6 +1,6 @@
 package de.entwicklertraining.openai4j.images.generations;
 
-import de.entwicklertraining.openai4j.GptResponse;
+import de.entwicklertraining.openai4j.OpenAIResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Holds the results (image URLs or Base64) returned by DALL·E 2
  */
-public final class DallE2Response extends GptResponse<DallE2Request> {
+public final class DallE2Response extends OpenAIResponse<DallE2Request> {
 
     private final List<String> images = new ArrayList<>();
 

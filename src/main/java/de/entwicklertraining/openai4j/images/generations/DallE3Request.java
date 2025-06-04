@@ -1,7 +1,7 @@
 package de.entwicklertraining.openai4j.images.generations;
 
-import de.entwicklertraining.openai4j.GptClient;
-import de.entwicklertraining.openai4j.GptRequest;
+import de.entwicklertraining.openai4j.OpenAIClient;
+import de.entwicklertraining.openai4j.OpenAIRequest;
 import de.entwicklertraining.api.base.ApiRequestBuilderBase;
 import org.json.JSONObject;
 
@@ -16,7 +16,7 @@ import java.util.Objects;
  *  - Supports optional 'quality' and 'style'.
  *  - Optionally, can prepend a "noMoreDetail" note to the prompt.
  */
-public final class DallE3Request extends GptRequest<DallE3Response> {
+public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
     private final String prompt;
     private final ImageSize size;
@@ -115,7 +115,7 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
      * @param client API client used to execute the request
      * @return builder instance
      */
-    public static Builder builder(GptClient client) {
+    public static Builder builder(OpenAIClient client) {
         return new Builder(client);
     }
 
@@ -151,7 +151,7 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
      * Builder class to configure and create a {@link DallE3Request}.
      */
     public static final class Builder extends ApiRequestBuilderBase<Builder, DallE3Request>  {
-        private final GptClient client;
+        private final OpenAIClient client;
         private String prompt;
         private ImageSize size = ImageSize.SIZE_1024x1024; // default
         private ResponseFormat responseFormat = ResponseFormat.URL; // default
@@ -162,14 +162,14 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
 
         /**
          * Creates a builder bound to the given client. Usually obtained via
-         * {@link GptClient#dallE3Request()}.
+         * {@link OpenAIClient#dallE3Request()}.
          *
          * @param client API client to execute the request
          */
         /**
          * Creates a builder bound to the given client.
          */
-        private Builder(GptClient client) {
+        private Builder(OpenAIClient client) {
             this.client = client;
         }
 
