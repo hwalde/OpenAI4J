@@ -1,5 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.images.generations.GptImage1Request;
 import de.entwicklertraining.openai4j.images.generations.GptImage1Request.*;
 import de.entwicklertraining.openai4j.images.generations.GptImage1Response;
@@ -22,8 +23,11 @@ public class GptImage1Example {
 
     public static void main(String[] args) {
         try {
+            // Generate GptClient
+            GptClient client = new GptClient();
+
             // Build a GPT-Image-1 request with prompt + size + outputFormat + n=1 + optional flags
-            GptImage1Response response = GptImage1Request.builder()
+            GptImage1Response response = client.images().generations().image1()
                     .prompt("A photorealistic portrait of a cyberpunk cat with neon fur")
                     .size(ImageSize.SIZE_1024x1024)
                     .quality(ImageQuality.HIGH)

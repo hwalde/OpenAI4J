@@ -23,10 +23,11 @@ import java.util.List;
 public class DallE2Example {
 
     public static void main(String[] args) throws Exception {
+        // Generate GptClient
+        GptClient client = new GptClient();
+
         // Build a DALL·E 2 request with prompt + size + responseFormat + n
         // Then execute -> returns a DallE2Response
-        GptClient client = new GptClient(ApiClientSettings.builder().build());
-
         DallE2Response response = client.images().generations().dalle2()
                 .prompt("A surreal painting of a robotic flamingo on a unicycle.")
                 .size(ImageSize.SIZE_512x512)

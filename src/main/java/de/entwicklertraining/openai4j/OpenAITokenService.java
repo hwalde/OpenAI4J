@@ -21,7 +21,7 @@ public final class OpenAITokenService {
      * Liefert die Token-Anzahl des übergebenen Textes.
      *
      * @param text Eingabetext (UTF-8)
-     * @return Anzahl Tokens (niemals < 0)
+     * @return Anzahl Tokens (niemals lower than 0)
      */
     public int calculateTokenCount(String text) {
         if (text == null || text.isEmpty()) {

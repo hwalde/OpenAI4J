@@ -1,5 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.embeddings.*;
 
 import java.util.List;
@@ -14,8 +15,11 @@ public class EmbeddingsExample {
         String s1 = "OpenAI provides powerful language models.";
         String s2 = "Large language models are offered by OpenAI.";
 
+        // Generate GptClient
+        GptClient client = new GptClient();
+
         /* 1) Vektor holen */
-        GptEmbeddingsResponse r = GptEmbeddingsRequest.builder()
+        GptEmbeddingsResponse r = client.embeddings()
                 .model(EmbeddingModel.TEXT_EMBEDDING_3_SMALL)
                 .addInput(s1)
                 .addInput(s2)
@@ -28,7 +32,7 @@ public class EmbeddingsExample {
                 r.promptTokens(), r.totalTokens());
 
         /* 2) Cosine-Similarity */
-        double sim = new GptCosineSimilarity(EmbeddingModel.TEXT_EMBEDDING_3_SMALL)
+        double sim = new GptCosineSimilarity(client, EmbeddingModel.TEXT_EMBEDDING_3_SMALL)
                 .similarity(s1, s2);
         System.out.printf("Cosine-Similarity: %.4f%n", sim);
     }

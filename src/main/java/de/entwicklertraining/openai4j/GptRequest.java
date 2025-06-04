@@ -11,6 +11,7 @@ import de.entwicklertraining.api.base.ApiRequestBuilderBase;
  *  - the HTTP method (POST, GET, ...)
  *  - the request body (JSON payload or null)
  *  - a factory method to create the corresponding GptResponse object
+ * @param <T> The corresponding GptResponse type
  */
 public abstract class GptRequest<T extends GptResponse<?>> extends ApiRequest<T> {
 

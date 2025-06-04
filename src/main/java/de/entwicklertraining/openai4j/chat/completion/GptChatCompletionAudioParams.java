@@ -1,6 +1,5 @@
 package de.entwicklertraining.openai4j.chat.completion;
 
-import com.google.gson.annotations.SerializedName;
 import de.entwicklertraining.openai4j.audio.speech.SpeechResponseFormat; // Reusing existing enum for format
 import de.entwicklertraining.openai4j.audio.speech.SpeechVoice; // Reusing existing enum for voice
 
@@ -12,10 +11,8 @@ import de.entwicklertraining.openai4j.audio.speech.SpeechVoice; // Reusing exist
  */
 public class GptChatCompletionAudioParams {
 
-    @SerializedName("voice")
     private final SpeechVoice voice;
 
-    @SerializedName("format")
     private final SpeechResponseFormat format; // Default is mp3 according to docs, but let's require explicit setting for clarity
 
     /**

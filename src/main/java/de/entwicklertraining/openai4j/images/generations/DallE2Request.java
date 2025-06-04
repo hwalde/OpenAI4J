@@ -14,9 +14,6 @@ import java.util.Objects;
  *  - Supports sizes: 256x256, 512x512, 1024x1024
  *  - Can generate up to 10 images in one request (n up to 10).
  *  - Doesn't support quality or style parameters.
- *
- * Now extends GptRequest<DallE2Response> directly, incorporating
- * the functionality that was previously in GptDallE2Request.
  */
 public final class DallE2Request extends GptRequest<DallE2Response> {
 

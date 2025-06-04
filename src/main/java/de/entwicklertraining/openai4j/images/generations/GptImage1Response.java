@@ -9,8 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Holds the results (base64-encoded images) returned by GPT-Image-1,
- * now extending GptResponse<GptImage1Request>.
+ * Holds the results (base64-encoded images) returned by GPT-Image-1
  */
 public final class GptImage1Response extends GptResponse<GptImage1Request> {
 

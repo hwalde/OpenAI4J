@@ -1,5 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.chat.completion.GptChatCompletionRequest;
 import de.entwicklertraining.openai4j.chat.completion.GptChatCompletionResponse;
 
@@ -13,7 +14,10 @@ public class GptChatCompletionWithVisionUrlExample {
         // Example: an external image URL
         String url = "https://software-quality-services.de/wp-content/uploads/2024/09/Walde_0141.jpg";
 
-        GptChatCompletionResponse response = GptChatCompletionRequest.builder()
+        // Generate GptClient
+        GptClient client = new GptClient();
+
+        GptChatCompletionResponse response = client.chat().completion()
                 .model("gpt-4o-mini") // or a vision-enabled model
                 .addSystemMessage("You are a helpful assistant that can see images.")
                 .addUserMessage("What do you see in this image?")

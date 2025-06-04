@@ -15,7 +15,7 @@ import java.util.Map;
  *  - Parallel tool calls
  *  - Structured outputs (response_format)
  *  - Model "finish_reason" edge cases like "stop", "tool_calls", "length", "content_filter"
- *  - Refusals & parsed JSON (from Structured Outputs)
+ *  - Refusals and parsed JSON (from Structured Outputs)
  *
  * Usage:
  *   1) Erstelle eine Instanz von GptChatCompletionCallHandler mit einem GptClient.

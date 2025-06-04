@@ -9,8 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Holds the results (image URLs or Base64) returned by DALL·E 3,
- * now extending GptResponse<DallE3Request>.
+ * Holds the results (image URLs or Base64) returned by DALL·E 3
  */
 public final class DallE3Response extends GptResponse<DallE3Request> {
 

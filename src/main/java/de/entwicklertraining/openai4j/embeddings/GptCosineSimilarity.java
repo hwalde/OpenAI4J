@@ -1,5 +1,7 @@
 package de.entwicklertraining.openai4j.embeddings;
 
+import de.entwicklertraining.openai4j.GptClient;
+
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,11 +16,13 @@ public final class GptCosineSimilarity {
 
     private final EmbeddingModel              model;
     private final Map<String,double[]>        cache = new ConcurrentHashMap<>();
+    private final GptClient client;
 
-    public GptCosineSimilarity() {
-        this(EmbeddingModel.TEXT_EMBEDDING_3_SMALL);
+    public GptCosineSimilarity(GptClient client) {
+        this(client, EmbeddingModel.TEXT_EMBEDDING_3_SMALL);
     }
-    public GptCosineSimilarity(EmbeddingModel model) {
+    public GptCosineSimilarity(GptClient client, EmbeddingModel model) {
+        this.client = client;
         this.model = model;
     }
 
@@ -37,7 +41,7 @@ public final class GptCosineSimilarity {
 
     private double[] embeddingFor(String text) {
         return cache.computeIfAbsent(text, t -> {
-            GptEmbeddingsResponse resp = GptEmbeddingsRequest.builder()
+            GptEmbeddingsResponse resp = client.embeddings()
                     .model(model)
                     .addInput(t)
                     .encodingFormat(EmbeddingEncodingFormat.FLOAT)

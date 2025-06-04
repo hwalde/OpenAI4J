@@ -31,8 +31,11 @@ public class GptChatCompletionWithFunctionCallingExample {
                 })
                 .build();
 
+        // Generate GptClient
+        GptClient client = new GptClient();
+
         // Build the request and execute it
-        GptChatCompletionResponse finalResponse = GptChatCompletionRequest.builder()
+        GptChatCompletionResponse finalResponse = client.chat().completion()
                 .model("gpt-4o-mini")
                 .addSystemMessage("You are a helpful assistant.")
                 .addUserMessage("What's the weather in Berlin and also the current time in Berlin?")

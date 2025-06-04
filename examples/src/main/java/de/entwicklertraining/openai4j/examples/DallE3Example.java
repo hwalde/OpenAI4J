@@ -1,5 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.images.generations.DallE3Request;
 import de.entwicklertraining.openai4j.images.generations.DallE3Request.ImageQuality;
 import de.entwicklertraining.openai4j.images.generations.DallE3Request.ImageSize;
@@ -25,8 +26,10 @@ import java.util.List;
 public class DallE3Example {
 
     public static void main(String[] args) throws Exception {
-        // Build a DALL·E 3 request with prompt + size + responseFormat + n=1 + optional flags
-        DallE3Response response = DallE3Request.builder()
+        // Generate GptClient
+        GptClient client = new GptClient();
+
+        DallE3Response response = client.images().generations().dalle3()
                 .prompt("A futuristic city floating in the sky, with neon lights")
                 .size(ImageSize.SIZE_1024x1024)
                 .responseFormat(ResponseFormat.B64_JSON)

@@ -8,8 +8,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 /**
- * Encapsulates all parameters required for a DALL·E 3 image generation request,
- * now extending GptRequest<DallE3Response>.
+ * Encapsulates all parameters required for a DALL·E 3 image generation request
  *
  * DALL·E 3 specifics:
  *  - Supports sizes: 1024x1024, 1024x1792, 1792x1024

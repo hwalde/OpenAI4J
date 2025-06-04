@@ -8,6 +8,7 @@ import org.json.JSONObject;
  *
  * Typically, implementations will parse the JSON into more specific fields and
  * offer helper methods to extract data.
+ * @param <T> The corresponding request type.
  */
 public abstract class GptResponse<T extends GptRequest<?>> extends ApiResponse<T> {
 

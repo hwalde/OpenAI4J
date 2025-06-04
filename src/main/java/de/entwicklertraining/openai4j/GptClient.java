@@ -11,6 +11,8 @@ import de.entwicklertraining.openai4j.images.generations.DallE3Request;
 import de.entwicklertraining.openai4j.images.generations.GptImage1Request;
 import de.entwicklertraining.api.base.ApiClientSettings;
 
+import java.util.Optional;
+
 /**
  * Enhanced GptClient with improved error handling and exponential backoff
  * for certain HTTP error codes (429, 500, 503).
@@ -25,6 +27,10 @@ import de.entwicklertraining.api.base.ApiClientSettings;
  *   - else -> throw ApiClient.ApiClientException
  */
 public final class GptClient extends ApiClient {
+    public GptClient() {
+        this(ApiClientSettings.builder().build(), "https://api.openai.com/v1");
+    }
+
     public GptClient(ApiClientSettings settings) {
         this(settings, "https://api.openai.com/v1");
     }
@@ -33,6 +39,10 @@ public final class GptClient extends ApiClient {
         super(settings);
 
         setBaseUrl(customBaseUrl);
+
+        if(!settings.getBearerAuthenticationKey().isPresent()) {
+            settings = settings.toBuilder().setBearerAuthenticationKey("TEST").build();
+        }
 
         /* Fehler­code-Registrierungen wie bisher */
         registerStatusCodeException(400, HTTP_400_RequestRejectedException.class, "The openai4j server could not understand the request due to invalid syntax", false);

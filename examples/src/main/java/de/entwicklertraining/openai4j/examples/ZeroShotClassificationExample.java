@@ -1,5 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.embeddings.GptCosineSimilarity;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public final class ZeroShotClassificationExample {
             "Terrible experience, would not recommend."
         );
 
-        GptCosineSimilarity similarity = new GptCosineSimilarity(); // cached embeddings
+        GptClient client = new GptClient();
+        GptCosineSimilarity similarity = new GptCosineSimilarity(client); // cached embeddings
 
         for (String text : texts) {
             String bestLabel = null;

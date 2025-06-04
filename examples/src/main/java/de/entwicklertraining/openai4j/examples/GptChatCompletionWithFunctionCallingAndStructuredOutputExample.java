@@ -137,8 +137,11 @@ public class GptChatCompletionWithFunctionCallingAndStructuredOutputExample {
                 true
         );
 
+        // Generate GptClient
+        GptClient client = new GptClient();
+
         // Baue die Anfrage
-        GptChatCompletionResponse finalResponse = GptChatCompletionRequest.builder()
+        GptChatCompletionResponse finalResponse = client.chat().completion()
                 .model("gpt-4o-mini")  // z.B. GPT-4o der das "json_schema" Format unterstützt
                 .responseFormat(respFormat)
                 .addSystemMessage("You are an assistant that can fetch the weather and schedule a meeting, " +

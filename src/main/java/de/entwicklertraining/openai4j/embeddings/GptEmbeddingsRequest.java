@@ -11,14 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Repräsentiert einen Aufruf von <pre>POST https://api.openai.com/v1/embeddings</pre>.
- *
- * Unterstützte Parameter lt. Spezifikation:
- *  • model                (Pflicht)
- *  • input                (Pflicht) – String oder Array<String> oder Array<Token-ID-Arrays>
- *  • dimensions           (Optional, Integer)
- *  • encoding_format      (Optional, "float" | "base64", Standard: "float")
- *  • user                 (Optional, String – wird für Missbrauchs-Tracing im Dashboard angezeigt)
+ * Repräsentiert einen Aufruf von <pre>POST /embeddings</pre>.
  */
 public final class GptEmbeddingsRequest extends GptRequest<GptEmbeddingsResponse> {
     /* Pflichtfelder */

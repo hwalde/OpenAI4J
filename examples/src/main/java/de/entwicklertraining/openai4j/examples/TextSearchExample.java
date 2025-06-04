@@ -1,5 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.embeddings.GptCosineSimilarity;
 
 import java.util.Comparator;
@@ -26,7 +27,9 @@ public final class TextSearchExample {
         );
         String query = "Where is the Eiffel Tower?";
 
-        GptCosineSimilarity similarity = new GptCosineSimilarity(); // Default: text-embedding-3-small
+        GptClient client = new GptClient();
+
+        GptCosineSimilarity similarity = new GptCosineSimilarity(client); // Default: text-embedding-3-small
 
         var scored = documents.stream()
             .map(doc -> new Result(doc, similarity.similarity(doc, query)))

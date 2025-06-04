@@ -1,7 +1,7 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.audio.speech.*;
-import de.herbertwalde.util.AudioService;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,8 +15,11 @@ public class GptSpeechExample {
 
     public static void main(String[] args) {
 
+        // Generate GptClient
+        GptClient client = new GptClient();
+
         // 1) Build and execute a TTS request
-        GptCreateSpeechResponse response = GptCreateSpeechRequest.builder()
+        GptCreateSpeechResponse response = client.audio().speech()
                 .model(SpeechModel.TTS_1_HD)    // or TTS_1
                 .input("Willkommen zur KVB Schulung - Tag 3")
                 .voice(SpeechVoice.ALLOY)
@@ -42,8 +45,5 @@ public class GptSpeechExample {
             throw new RuntimeException(e);
         }
         System.out.println("Wrote TTS audio to " + outputFilePath.toAbsolutePath());
-
-        AudioService audioService = new AudioService();
-        audioService.play(outputFilePath);
     }
 }

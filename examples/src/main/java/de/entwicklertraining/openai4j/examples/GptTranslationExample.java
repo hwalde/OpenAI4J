@@ -1,5 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.audio.translations.*;
 
 import java.nio.file.Path;
@@ -14,8 +15,11 @@ public class GptTranslationExample {
         // Adjust this path to your local audio file if needed
         Path audioFile = Path.of("src/main/resources/audio/deutsch-kurz.wav");
 
+        // Generate GptClient
+        GptClient client = new GptClient();
+
         // Build and execute the request
-        GptCreateTranslationResponse response = GptCreateTranslationRequest.builder()
+        GptCreateTranslationResponse response = client.audio().translation()
                 .file(audioFile)
                 .model(TranslationModel.WHISPER_1)
                 .prompt("This is a test prompt in English.")

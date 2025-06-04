@@ -9,9 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Holds the results (image URLs or Base64) returned by DALL·E 2,
- * now extending GptResponse<DallE2Request> to parse the JSON as previously done
- * in GptDallE2Response.
+ * Holds the results (image URLs or Base64) returned by DALL·E 2
  */
 public final class DallE2Response extends GptResponse<DallE2Request> {
 

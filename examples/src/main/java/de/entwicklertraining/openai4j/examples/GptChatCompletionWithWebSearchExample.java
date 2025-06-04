@@ -1,5 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.chat.completion.GptChatCompletionRequest;
 import de.entwicklertraining.openai4j.chat.completion.GptChatCompletionResponse;
 import de.entwicklertraining.openai4j.chat.completion.GptWebSearchOptions;
@@ -25,8 +26,11 @@ public class GptChatCompletionWithWebSearchExample {
                 )
                 .build();
 
+        // Generate GptClient
+        GptClient client = new GptClient();
+
         // Build and execute the chat completion request with web search enabled
-        GptChatCompletionResponse response = GptChatCompletionRequest.builder()
+        GptChatCompletionResponse response = client.chat().completion()
                 .model("gpt-4o-search-preview") // Use a model that supports web search
                 .addSystemMessage("You are a helpful assistant with access to web search.")
                 .addUserMessage("Was sind die Top-Meldungen des Tages?")

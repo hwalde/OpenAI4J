@@ -54,21 +54,24 @@ public class GptChatCompletionWithStructuredOutputExample {
                 true
         );
 
-        // 3) Build the GptChatCompletionRequest and execute it:
-        GptChatCompletionResponse finalResponse = GptChatCompletionRequest.builder()
+        // 3) Generate GptClient
+        GptClient client = new GptClient();
+
+        // 4) Build the GptChatCompletionRequest and execute it:
+        GptChatCompletionResponse finalResponse = client.chat().completion()
                 .model("gpt-4o-mini")  // or "gpt-4o-2024-08-06", etc.
                 .responseFormat(responseFormat)
                 .addSystemMessage("You are an assistant that outputs structured JSON for an event object.")
                 .addUserMessage("Alice and Bob are attending a new-year party on next Monday. Please output the event data.")
                 .execute();
 
-        // 4) Check for refusal
+        // 5) Check for refusal
         if (finalResponse.hasRefusal()) {
             System.out.println("The model refused to comply: " + finalResponse.refusal());
             return;
         }
 
-        // 5) Lets print the result
+        // 6) Lets print the result
         Event event = finalResponse.convertTo(Event.class);
         System.out.println(event);
     }

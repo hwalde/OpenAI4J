@@ -964,7 +964,7 @@ public final class GptChatCompletionRequest extends GptRequest<GptChatCompletion
 
         /**
          * Reads the local file from filePath, base64-encodes it, and appends as a "user" message
-         * containing a single "image_url" item with data URI "data:image/...;base64,<encoded>".
+         * containing a single "image_url" item with data URI "data:image/...;base64,...".
          * We also attach the "detail" parameter if provided.
          */
         public Builder addImageByBase64(Path filePath, ImageDetail detail) {

@@ -1,6 +1,6 @@
 package de.entwicklertraining.openai4j.examples;
 
-import de.entwicklertraining.openai4j.chat.completion.GptChatCompletionRequest;
+import de.entwicklertraining.openai4j.GptClient;
 import de.entwicklertraining.openai4j.chat.completion.GptChatCompletionResponse;
 
 import java.util.HashMap;
@@ -23,8 +23,11 @@ public class GptChatCompletionWithOptionsExample {
         logitBias.put(1234, -100); // Strongly discourage token 1234
         logitBias.put(5678, 50);   // Encourage token 5678
 
+        // Generate GptClient
+        GptClient client = new GptClient();
+
         // Build and execute the chat completion request with several options
-        GptChatCompletionResponse response = GptChatCompletionRequest.builder()
+        GptChatCompletionResponse response = client.chat().completion()
                 .model("gpt-4o-mini")
                 .addSystemMessage("You are a creative assistant.")
                 .addUserMessage("Suggest a name for a new eco-friendly tech startup.")
