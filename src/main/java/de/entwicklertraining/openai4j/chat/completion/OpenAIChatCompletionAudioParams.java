@@ -32,10 +32,20 @@ public class OpenAIChatCompletionAudioParams {
         this.format = format;
     }
 
+    /**
+     * Returns the voice used for speech synthesis.
+     *
+     * @return the selected voice
+     */
     public SpeechVoice getVoice() {
         return voice;
     }
 
+    /**
+     * Returns the audio format for the generated speech.
+     *
+     * @return the response format
+     */
     public SpeechResponseFormat getFormat() {
         return format;
     }

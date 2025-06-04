@@ -99,7 +99,11 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
     }
 
     /**
-     * Final prompt that will be used, considering noMoreDetail if applicable.
+     * Final prompt that will be sent to the API.
+     * If {@code noMoreDetail} is {@code true}, a note requesting no additional
+     * detail is prepended.
+     *
+     * @return the prompt actually used for the request
      */
     public String effectivePrompt() {
         if (noMoreDetail) {
@@ -119,30 +123,65 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
         return new Builder(client);
     }
 
+    /**
+     * Original prompt text supplied by the user.
+     *
+     * @return the prompt
+     */
     public String prompt() {
         return prompt;
     }
 
+    /**
+     * Requested image size.
+     *
+     * @return the image size
+     */
     public ImageSize size() {
         return size;
     }
 
+    /**
+     * Response format specifying whether URLs or base64 data are returned.
+     *
+     * @return the response format
+     */
     public ResponseFormat responseFormat() {
         return responseFormat;
     }
 
+    /**
+     * Number of images requested from the API.
+     *
+     * @return the number of images
+     */
     public int n() {
         return n;
     }
 
+    /**
+     * Optional quality setting for the generated image.
+     *
+     * @return the image quality or {@code null} if default
+     */
     public ImageQuality quality() {
         return quality;
     }
 
+    /**
+     * Optional style hint used for image generation.
+     *
+     * @return the image style or {@code null} if not set
+     */
     public ImageStyle style() {
         return style;
     }
 
+    /**
+     * Indicates whether a "no more detail" note is prepended to the prompt.
+     *
+     * @return {@code true} if no additional detail should be added
+     */
     public boolean noMoreDetail() {
         return noMoreDetail;
     }
@@ -175,6 +214,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
         /**
          * Sets the prompt describing the desired image.
+         *
+         * @param prompt the image description
+         * @return this builder instance
          */
         public Builder prompt(String prompt) {
             this.prompt = prompt;
@@ -183,6 +225,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
         /**
          * Sets the image size to request.
+         *
+         * @param size the desired image size
+         * @return this builder instance
          */
         public Builder size(ImageSize size) {
             this.size = size;
@@ -191,6 +236,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
         /**
          * Sets the desired response format.
+         *
+         * @param rf the response format
+         * @return this builder instance
          */
         public Builder responseFormat(ResponseFormat rf) {
             this.responseFormat = rf;
@@ -199,6 +247,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
         /**
          * Number of images to generate. The API typically only allows {@code 1}.
+         *
+         * @param n number of images
+         * @return this builder instance
          */
         public Builder n(int n) {
             this.n = n;
@@ -207,6 +258,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
         /**
          * Optional image quality setting.
+         *
+         * @param quality desired image quality
+         * @return this builder instance
          */
         public Builder quality(ImageQuality quality) {
             this.quality = quality;
@@ -215,6 +269,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
         /**
          * Optional style hint for the image.
+         *
+         * @param style desired image style
+         * @return this builder instance
          */
         public Builder style(ImageStyle style) {
             this.style = style;
@@ -223,6 +280,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
         /**
          * If true, prepends a note to the prompt requesting no additional detail.
+         *
+         * @param val whether to add the no-more-detail flag
+         * @return this builder instance
          */
         public Builder noMoreDetail(boolean val) {
             this.noMoreDetail = val;
@@ -231,6 +291,8 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
 
         /**
          * Builds the request using the configured parameters.
+         *
+         * @return immutable request instance
          */
         public DallE3Request build() {
             return new DallE3Request(
@@ -268,8 +330,11 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
      * Supported image sizes for DALL·E 3.
      */
     public enum ImageSize {
+        /** 1024x1024 pixels */
         SIZE_1024x1024("1024x1024"),
+        /** 1024x1792 pixels */
         SIZE_1024x1792("1024x1792"),
+        /** 1792x1024 pixels */
         SIZE_1792x1024("1792x1024");
 
         private final String value;
@@ -278,6 +343,8 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
         }
         /**
          * Returns the literal size value used by the API.
+         *
+         * @return API string for this size
          */
         public String value() {
             return value;
@@ -288,7 +355,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
      * Quality options for generated images.
      */
     public enum ImageQuality {
+        /** Standard quality */
         STANDARD("standard"),
+        /** High definition quality */
         HD("hd");
 
         private final String value;
@@ -297,6 +366,8 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
         }
         /**
          * API literal for image quality.
+         *
+         * @return string used by the API
          */
         public String value() {
             return value;
@@ -307,7 +378,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
      * Style options controlling the visual appearance of the result.
      */
     public enum ImageStyle {
+        /** Vivid, saturated colors */
         VIVID("vivid"),
+        /** Natural, subdued colors */
         NATURAL("natural");
 
         private final String value;
@@ -316,6 +389,8 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
         }
         /**
          * API literal for image style.
+         *
+         * @return string used by the API
          */
         public String value() {
             return value;
@@ -326,7 +401,9 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
      * Format of the API response payload.
      */
     public enum ResponseFormat {
+        /** URLs pointing to the images */
         URL("url"),
+        /** Base64-encoded image data */
         B64_JSON("b64_json");
 
         private final String value;
@@ -335,6 +412,8 @@ public final class DallE3Request extends OpenAIRequest<DallE3Response> {
         }
         /**
          * String used to request the corresponding response format.
+         *
+         * @return API literal for this format
          */
         public String value() {
             return value;

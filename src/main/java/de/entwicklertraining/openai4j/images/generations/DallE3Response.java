@@ -15,6 +15,12 @@ public final class DallE3Response extends OpenAIResponse<DallE3Request> {
 
     private final List<String> images = new ArrayList<>();
 
+    /**
+     * Parses the raw response returned by the API.
+     *
+     * @param rawBody JSON payload from the API
+     * @param request originating request instance
+     */
     public DallE3Response(String rawBody, DallE3Request request) {
         super(new JSONObject(rawBody), request);
         parseImages();
@@ -35,6 +41,12 @@ public final class DallE3Response extends OpenAIResponse<DallE3Request> {
         }
     }
 
+    /**
+     * Returns the generated images as URLs or base64 strings depending on the
+     * request's {@link DallE3Request.ResponseFormat}.
+     *
+     * @return immutable list of image results
+     */
     public List<String> images() {
         return Collections.unmodifiableList(images);
     }

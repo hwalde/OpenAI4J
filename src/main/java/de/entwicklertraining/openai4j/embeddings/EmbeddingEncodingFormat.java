@@ -8,7 +8,9 @@ package de.entwicklertraining.openai4j.embeddings;
  * </ul>
  */
 public enum EmbeddingEncodingFormat {
+    /** floating point vector */
     FLOAT("float"),
+    /** base64 encoded vector */
     BASE64("base64");
 
     private final String value;
@@ -19,6 +21,8 @@ public enum EmbeddingEncodingFormat {
 
     /**
      * Returns the string literal used in API requests.
+     *
+     * @return API literal for this encoding
      */
     public String value() {
         return value;

@@ -79,18 +79,38 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
         return new DallE2Response(responseBody, this);
     }
 
+    /**
+     * Returns the textual prompt used to generate the images.
+     *
+     * @return the prompt text
+     */
     public String prompt() {
         return prompt;
     }
 
+    /**
+     * Requested size of the generated image.
+     *
+     * @return the image size
+     */
     public ImageSize size() {
         return size;
     }
 
+    /**
+     * Format of the response returned by the API.
+     *
+     * @return the response format
+     */
     public ResponseFormat responseFormat() {
         return responseFormat;
     }
 
+    /**
+     * Number of images requested from the API.
+     *
+     * @return the amount of images to generate
+     */
     public int n() {
         return n;
     }
@@ -130,6 +150,9 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
 
         /**
          * Sets the textual prompt to generate from.
+         *
+         * @param prompt the image description
+         * @return this builder instance
          */
         public Builder prompt(String prompt) {
             this.prompt = prompt;
@@ -138,6 +161,9 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
 
         /**
          * Specifies the desired image size.
+         *
+         * @param size the requested size
+         * @return this builder instance
          */
         public Builder size(ImageSize size) {
             this.size = size;
@@ -146,6 +172,9 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
 
         /**
          * Sets the response format.
+         *
+         * @param rf the desired response format
+         * @return this builder instance
          */
         public Builder responseFormat(ResponseFormat rf) {
             this.responseFormat = rf;
@@ -154,6 +183,9 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
 
         /**
          * Number of images to generate (1–10).
+         *
+         * @param n number of images
+         * @return this builder instance
          */
         public Builder n(int n) {
             this.n = n;
@@ -162,6 +194,8 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
 
         /**
          * Builds the request using the configured parameters.
+         *
+         * @return immutable request instance
          */
         public DallE2Request build() {
             return new DallE2Request(this, prompt, size, responseFormat, n);
@@ -188,8 +222,11 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
      * DALL·E 2 valid sizes.
      */
     public enum ImageSize {
+        /** 256 by 256 pixels */
         SIZE_256x256("256x256"),
+        /** 512 by 512 pixels */
         SIZE_512x512("512x512"),
+        /** 1024 by 1024 pixels */
         SIZE_1024x1024("1024x1024");
 
         private final String value;
@@ -198,6 +235,8 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
         }
         /**
          * Returns the literal size used by the API.
+         *
+         * @return API string for this size
          */
         public String value() {
             return value;
@@ -208,7 +247,9 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
      * Supported response formats for DALL·E 2 requests.
      */
     public enum ResponseFormat {
+        /** URLs to the generated images */
         URL("url"),
+        /** Base64-encoded image data */
         B64_JSON("b64_json");
 
         private final String value;
@@ -217,6 +258,8 @@ public final class DallE2Request extends OpenAIRequest<DallE2Response> {
         }
         /**
          * API string for this response format.
+         *
+         * @return literal used in requests
          */
         public String value() {
             return value;

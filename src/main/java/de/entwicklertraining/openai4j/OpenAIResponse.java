@@ -27,6 +27,8 @@ public abstract class OpenAIResponse<T extends OpenAIRequest<?>> extends ApiResp
 
     /**
      * Returns the raw JSON object of the response.
+     *
+     * @return parsed JSON payload
      */
     public JSONObject getJson() {
         return json;

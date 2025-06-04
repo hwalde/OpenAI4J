@@ -74,6 +74,9 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
         }
     }
 
+    /**
+     * Level of detail to use when the request includes image inputs.
+     */
     public enum ImageDetail {
         LOW("low"),
         HIGH("high"),
@@ -93,6 +96,9 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
         }
     }
 
+    /**
+     * Additional options applicable when streaming responses.
+     */
     public enum StreamOption {
         INCLUDE_USAGE("include_usage");
 
@@ -208,18 +214,38 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
         this.webSearchOptions = webSearchOptions; // Added assignment
     }
 
+    /**
+     * Returns the model identifier for the request.
+     *
+     * @return the model name
+     */
     public String model() {
         return model;
     }
 
+    /**
+     * Returns the chat messages that make up the conversation history.
+     *
+     * @return immutable list of message JSON objects
+     */
     public List<JSONObject> messages() {
         return messages;
     }
 
+    /**
+     * Returns the tools available to the model.
+     *
+     * @return list of tool definitions
+     */
     public List<OpenAIToolDefinition> tools() {
         return tools;
     }
 
+    /**
+     * Desired format of the API response.
+     *
+     * @return response format object or {@code null}
+     */
     public OpenAIResponseFormat responseFormat() {
         return responseFormat;
     }
@@ -230,6 +256,11 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
      *  - REQUIRED => must call a tool
      *  - NONE => no tool calls
      */
+    /**
+     * Strategy used for tool calling (auto, required, none).
+     *
+     * @return the configured tool choice or {@code null}
+     */
     public ToolChoice toolChoiceEnum() {
         return toolChoiceEnum;
     }
@@ -237,10 +268,20 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
     /**
      * If non-null, indicates we are forcing the model to call exactly this specific tool.
      */
+    /**
+     * Tool that the model is forced to invoke, if any.
+     *
+     * @return the forced tool definition or {@code null}
+     */
     public OpenAIToolDefinition forcedTool() {
         return forcedToolChoice;
     }
 
+    /**
+     * Whether multiple tool calls may be returned in a single response.
+     *
+     * @return {@code Boolean} flag or {@code null} for server default
+     */
     public Boolean parallelToolCalls() {
         return parallelToolCalls;
     }
@@ -248,14 +289,24 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
     /**
      * Returns the parameters for audio output, if specified.
      */
-    public OpenAIChatCompletionAudioParams audioParams() { // Added getter
+    /**
+     * Parameters controlling audio output, if requested.
+     *
+     * @return audio parameter object or {@code null}
+     */
+    public OpenAIChatCompletionAudioParams audioParams() {
         return audioParams;
     }
 
     /**
      * Returns the frequency penalty value, if specified.
      */
-    public Double frequencyPenalty() { // Added getter
+    /**
+     * Frequency penalty to apply when generating text.
+     *
+     * @return frequency penalty value or {@code null}
+     */
+    public Double frequencyPenalty() {
         return frequencyPenalty;
     }
 
@@ -263,7 +314,12 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
      * Returns the logit bias map, if specified.
      * Keys are token IDs, values are bias adjustments (-100 to 100).
      */
-    public Map<Integer, Integer> logitBias() { // Added getter
+    /**
+     * Map of token IDs to bias adjustments applied during sampling.
+     *
+     * @return unmodifiable bias map or {@code null}
+     */
+    public Map<Integer, Integer> logitBias() {
         // Return an unmodifiable view to prevent external modification
         return (logitBias != null) ? Collections.unmodifiableMap(logitBias) : null;
     }
@@ -271,10 +327,20 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
     /**
      * Returns whether log probabilities should be returned, if specified.
      */
-    public Boolean logprobs() { // Added getter
+    /**
+     * Whether log probabilities should be included in the response.
+     *
+     * @return {@code Boolean} flag or {@code null}
+     */
+    public Boolean logprobs() {
         return logprobs;
     }
 
+    /**
+     * Nucleus sampling parameter controlling diversity.
+     *
+     * @return top_p value or {@code null}
+     */
     public Double topP() {
         return topP;
     }
@@ -285,7 +351,12 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
      * This parameter replaces the deprecated {@code max_tokens} parameter.
      * See <a href="https://platform.openai.com/docs/guides/reasoning">OpenAI Reasoning Tokens Documentation</a> for details.
      */
-    public Integer maxCompletionTokens() { // Added getter
+    /**
+     * Upper bound for the number of tokens that can be generated for a completion.
+     *
+     * @return maximum completion tokens or {@code null}
+     */
+    public Integer maxCompletionTokens() {
         return maxCompletionTokens;
     }
 
@@ -293,7 +364,12 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
      * Returns the metadata map, if specified.
      * Keys have max length 64, values max length 512. Max 16 pairs.
      */
-    public Map<String, String> metadata() { // Added getter
+    /**
+     * Optional metadata attached to the request.
+     *
+     * @return unmodifiable metadata map or {@code null}
+     */
+    public Map<String, String> metadata() {
         // Return an unmodifiable view
         return (metadata != null) ? Collections.unmodifiableMap(metadata) : null;
     }
@@ -302,7 +378,12 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
      * Returns the set of requested output modalities.
      * Defaults to a set containing only {@link OpenAIOutputModality#TEXT}.
      */
-    public Set<OpenAIOutputModality> modalities() { // Added getter
+    /**
+     * Output modalities requested from the API.
+     *
+     * @return set of modalities
+     */
+    public Set<OpenAIOutputModality> modalities() {
         // Return an unmodifiable view
         return Collections.unmodifiableSet(modalities);
     }
@@ -310,14 +391,24 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
     /**
      * Returns the number of chat completion choices to generate, if specified.
      */
-    public Integer n() { // Added getter
+    /**
+     * Number of chat completion choices to generate.
+     *
+     * @return number of choices or {@code null}
+     */
+    public Integer n() {
         return n;
     }
 
     /**
      * Returns the prediction parameters, if specified.
      */
-    public OpenAIChatCompletionPredictionParams predictionParams() { // Added getter
+    /**
+     * Prediction parameters optionally provided to speed up responses.
+     *
+     * @return prediction parameters or {@code null}
+     */
+    public OpenAIChatCompletionPredictionParams predictionParams() {
         return predictionParams;
     }
 
@@ -327,7 +418,12 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
      * whether they appear in the text so far, increasing the model's likelihood
      * to talk about new topics.
      */
-    public Double presencePenalty() { // Added getter
+    /**
+     * Presence penalty influencing topic diversity.
+     *
+     * @return presence penalty value or {@code null}
+     */
+    public Double presencePenalty() {
         return presencePenalty;
     }
 
@@ -335,54 +431,103 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
      * Returns the reasoning effort setting, if specified.
      * Applicable only for o-series models.
      */
-    public OpenAIReasoningEffort reasoningEffort() { // Added getter
+    /**
+     * Effort level for reasoning in o-series models.
+     *
+     * @return reasoning effort or {@code null}
+     */
+    public OpenAIReasoningEffort reasoningEffort() {
         return reasoningEffort;
     }
 
     /**
      * Returns the seed value for deterministic sampling, if specified.
      */
+    /**
+     * Seed for deterministic sampling.
+     *
+     * @return seed value or {@code null}
+     */
     public Integer seed() {
         return seed;
     }
 
+    /**
+     * Identifier representing the end user of the application.
+     *
+     * @return user identifier or {@code null}
+     */
     public String user() {
         return user;
     }
 
+    /**
+     * Whether the response should be streamed.
+     *
+     * @return {@code true} if streaming is enabled
+     */
     public boolean stream() {
         return stream;
     }
 
+    /**
+     * Sampling temperature used for the request.
+     *
+     * @return temperature value or {@code null}
+     */
     public Double temperature() {
         return temperature;
     }
 
+    /**
+     * Additional stream options requested from the API.
+     *
+     * @return set of options or {@code null}
+     */
     public Set<StreamOption> streamOptions() {
         return streamOptions != null ? Collections.unmodifiableSet(streamOptions) : null;
     }
 
+    /**
+     * Service tier used for processing the request.
+     *
+     * @return the service tier or {@code null}
+     */
     public OpenAIServiceTier serviceTier() {
         return serviceTier;
     }
 
+    /**
+     * Stop sequences that will terminate generation when encountered.
+     *
+     * @return list of stop sequences or {@code null}
+     */
     public List<String> stopSequences() {
         return stopSequences;
     }
 
+    /**
+     * Number of log probabilities to return for each generated token.
+     *
+     * @return count of top log probabilities or {@code null}
+     */
     public Integer topLogprobs() {
         return topLogprobs;
     }
 
     /**
-     * Returns the web search options, if specified.
+     * Options controlling the integrated web search capability.
+     *
+     * @return web search options or {@code null}
      */
-    public OpenAIWebSearchOptions webSearchOptions() { // Added getter
+    public OpenAIWebSearchOptions webSearchOptions() {
         return webSearchOptions;
     }
 
     /**
      * Builds the JSON body for this request.
+     *
+     * @return request body as a JSON object
      */
     public JSONObject toJson() {
         JSONObject body = new JSONObject();
@@ -589,6 +734,9 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
         return new Builder(client);
     }
 
+    /**
+     * Fluent builder for {@link OpenAIChatCompletionRequest} instances.
+     */
     public static final class Builder extends ApiRequestBuilderBase<Builder, OpenAIChatCompletionRequest> {
         private final OpenAIClient client;
         private String model;
