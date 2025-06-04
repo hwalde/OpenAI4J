@@ -14,6 +14,12 @@ public abstract class GptResponse<T extends GptRequest<?>> extends ApiResponse<T
 
     protected final JSONObject json;
 
+    /**
+     * Creates a response object bound to the originating request.
+     *
+     * @param json    parsed JSON payload returned by the API
+     * @param request corresponding request instance
+     */
     protected GptResponse(JSONObject json, T request) {
         super(request);
         this.json = json;

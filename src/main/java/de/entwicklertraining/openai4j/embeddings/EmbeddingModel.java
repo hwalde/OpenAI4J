@@ -1,9 +1,8 @@
 package de.entwicklertraining.openai4j.embeddings;
 
 /**
- * Unterstützte Embedding-Modelle.
- *
- * Achtung – die Namen müssen exakt den Open-AI-Bezeichnungen entsprechen.
+ * Supported embedding models.  The enum names must exactly match the
+ * identifiers expected by the OpenAI API.
  */
 public enum EmbeddingModel {
 
@@ -12,7 +11,15 @@ public enum EmbeddingModel {
     TEXT_EMBEDDING_ADA_002("text-embedding-ada-002");
 
     private final String value;
-    EmbeddingModel(String value) { this.value = value; }
 
-    public String value() { return value; }
+    EmbeddingModel(String value) {
+        this.value = value;
+    }
+
+    /**
+     * Returns the literal model identifier used by the API.
+     */
+    public String value() {
+        return value;
+    }
 }

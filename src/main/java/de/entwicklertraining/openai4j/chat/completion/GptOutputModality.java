@@ -25,6 +25,9 @@ public enum GptOutputModality {
     }
 
     @JsonValue
+    /**
+     * Returns the literal value to include in the request JSON.
+     */
     public String getValue() {
         return value;
     }

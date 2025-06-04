@@ -23,6 +23,20 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
     private final Background background;
     private final Moderation moderation;
 
+    /**
+     * Constructs a request for the gpt-image-1 generation endpoint.
+     *
+     * @param builder           originating builder instance
+     * @param prompt            textual prompt for the image
+     * @param n                 number of images to generate
+     * @param user              optional user identifier forwarded to the API
+     * @param size              requested image size
+     * @param quality           desired quality level
+     * @param outputFormat      image file format
+     * @param outputCompression optional compression level for PNG/WebP
+     * @param background        background transparency setting
+     * @param moderation        moderation behaviour
+     */
     private GptImage1Request(
             Builder builder,
             String prompt,
@@ -85,6 +99,12 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
         return new GptImage1Response(responseBody, this);
     }
 
+    /**
+     * Returns a new builder for a GPT-Image‑1 request.
+     *
+     * @param client client used to execute the request
+     * @return builder instance
+     */
     public static Builder builder(GptClient client) {
         return new Builder(client);
     }
@@ -140,55 +160,94 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
         private Background background = Background.AUTO;
         private Moderation moderation = Moderation.AUTO;
 
+        /**
+         * Creates a builder using the provided client. Builders are normally
+         * created via {@link GptClient#gptImage1Request()}.
+         *
+         * @param client the API client
+         */
+        /**
+         * Creates a builder bound to the provided client.
+         */
         private Builder(GptClient client) {
             this.client = client;
         }
 
+        /**
+         * Sets the textual prompt for the image generation.
+         */
         public Builder prompt(String prompt) {
             this.prompt = prompt;
             return this;
         }
 
+        /**
+         * Number of images to generate.
+         */
         public Builder n(int n) {
             this.n = n;
             return this;
         }
 
+        /**
+         * Optional user identifier forwarded to the API.
+         */
         public Builder user(String user) {
             this.user = user;
             return this;
         }
 
+        /**
+         * Sets the desired image size.
+         */
         public Builder size(ImageSize size) {
             this.size = size;
             return this;
         }
 
+        /**
+         * Sets the requested quality level.
+         */
         public Builder quality(ImageQuality quality) {
             this.quality = quality;
             return this;
         }
 
+        /**
+         * Sets the image format of the response.
+         */
         public Builder outputFormat(OutputFormat outputFormat) {
             this.outputFormat = outputFormat;
             return this;
         }
 
+        /**
+         * Compression level for PNG/WebP outputs, if applicable.
+         */
         public Builder outputCompression(Integer outputCompression) {
             this.outputCompression = outputCompression;
             return this;
         }
 
+        /**
+         * Selects the background transparency behaviour.
+         */
         public Builder background(Background background) {
             this.background = background;
             return this;
         }
 
+        /**
+         * Sets how the request should handle content moderation.
+         */
         public Builder moderation(Moderation moderation) {
             this.moderation = moderation;
             return this;
         }
 
+        /**
+         * Builds the request with the configured parameters.
+         */
         public GptImage1Request build() {
             return new GptImage1Request(
                     this,
@@ -205,11 +264,17 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
         }
 
         @Override
+        /**
+         * Executes the request with exponential backoff.
+         */
         public GptImage1Response executeWithExponentialBackoff() {
             return client.sendRequest(build());
         }
 
         @Override
+        /**
+         * Executes the request without retries.
+         */
         public GptImage1Response execute() {
             return client.sendRequest(build());
         }
@@ -217,6 +282,9 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
 
     // Enums for gpt-image-1
 
+    /**
+     * Available image dimensions for gpt-image-1.
+     */
     public enum ImageSize {
         SIZE_1024x1024("1024x1024"),
         SIZE_1536x1024("1536x1024"),
@@ -227,11 +295,17 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
         ImageSize(String value) {
             this.value = value;
         }
+        /**
+         * String literal describing the requested size.
+         */
         public String value() {
             return value;
         }
     }
 
+    /**
+     * Quality levels for the generated image.
+     */
     public enum ImageQuality {
         HIGH("high"),
         MEDIUM("medium"),
@@ -242,11 +316,17 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
         ImageQuality(String value) {
             this.value = value;
         }
+        /**
+         * Returns the literal used for image quality.
+         */
         public String value() {
             return value;
         }
     }
 
+    /**
+     * File formats that can be returned by the API.
+     */
     public enum OutputFormat {
         PNG("png"),
         JPEG("jpeg"),
@@ -256,11 +336,17 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
         OutputFormat(String value) {
             this.value = value;
         }
+        /**
+         * Returns the format identifier for generated images.
+         */
         public String value() {
             return value;
         }
     }
 
+    /**
+     * Background options for generated images.
+     */
     public enum Background {
         TRANSPARENT("transparent"),
         OPAQUE("opaque"),
@@ -270,11 +356,17 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
         Background(String value) {
             this.value = value;
         }
+        /**
+         * Literal controlling the image background type.
+         */
         public String value() {
             return value;
         }
     }
 
+    /**
+     * Moderation settings applied to the request.
+     */
     public enum Moderation {
         AUTO("auto"),
         LOW("low");
@@ -283,6 +375,9 @@ public final class GptImage1Request extends GptRequest<GptImage1Response> {
         Moderation(String value) {
             this.value = value;
         }
+        /**
+         * Returns the moderation setting string.
+         */
         public String value() {
             return value;
         }

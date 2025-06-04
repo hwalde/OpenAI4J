@@ -11,19 +11,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * GptChatCompletionCallHandler extends the old GptToolCallHandler to additionally handle:
- *  - Parallel tool calls
- *  - Structured outputs (response_format)
- *  - Model "finish_reason" edge cases like "stop", "tool_calls", "length", "content_filter"
- *  - Refusals and parsed JSON (from Structured Outputs)
- *
- * Usage:
- *   1) Erstelle eine Instanz von GptChatCompletionCallHandler mit einem GptClient.
- *   2) Rufe handleRequest(...) mit einem GptChatCompletionRequest auf.
- *   3) Erhalte ein GptChatCompletionResponse zurück, welches entweder:
- *      - Keine Tool Calls mehr enthält => finale Antwort
- *      - Eine refusal oder partial response => handle entsprechend
- *      - Evtl. structured Output => entnehme über GptChatCompletionResponse#parsed() etc.
+ * Helper that repeatedly sends chat completion requests until a final response
+ * is reached.  It transparently executes tool calls returned by the model and
+ * re‑sends the conversation with the tool outputs appended.  Structured output
+ * and refusal responses are handled as well.
+ * <p>
+ * Typical usage:
+ * <ol>
+ *   <li>Create an instance with a {@link GptClient}.</li>
+ *   <li>Invoke {@link #handleRequest(GptChatCompletionRequest, boolean)} with an
+ *       initial request.</li>
+ *   <li>Process the returned {@link GptChatCompletionResponse} which either
+ *       contains the final assistant message or indicates a refusal.</li>
+ * </ol>
  */
 public final class GptChatCompletionCallHandler {
 
@@ -31,16 +31,26 @@ public final class GptChatCompletionCallHandler {
     private static final int MAX_TURNS = 4;
     private final GptClient client;
 
+    /**
+     * Creates a new handler using the given client to perform the HTTP calls.
+     *
+     * @param client OpenAI client used for all requests
+     */
     public GptChatCompletionCallHandler(GptClient client) {
         this.client = client;
     }
 
     /**
-     * Hauptmethode: Schickt die Unterhaltung an GPT,
-     * verarbeitet ggf. parallele Tool-Calls, structured outputs und kehrt
-     * erst zurück, wenn ein finales Ergebnis (stop) oder ein Fehler bzw. refusal vorliegt.
+     * Sends the request to the API and iteratively processes any tool calls
+     * until the model returns a final message.
+     *
+     * @param initialRequest        the initial chat completion request
+     * @param useExponentialBackoff whether to apply retries with exponential
+     *                              backoff for transient errors
+     * @return the final response from the API
      */
-    public GptChatCompletionResponse handleRequest(GptChatCompletionRequest initialRequest, boolean useExponentialBackoff) {
+    public GptChatCompletionResponse handleRequest(GptChatCompletionRequest initialRequest,
+                                                   boolean useExponentialBackoff) {
         // Kopiere initiale Messages und Tools, da wir die Nachrichten sukzessive erweitern
         List<JSONObject> messages = new ArrayList<>(initialRequest.messages());
         Map<String, GptToolDefinition> toolMap = new HashMap<>();
@@ -163,10 +173,15 @@ public final class GptChatCompletionCallHandler {
     }
 
     /**
-     * Hilfsmethode, um aus den gegebenen Messages und der initialen Request-Konfiguration
-     * einen neuen GptChatCompletionRequest zu bauen, der fortlaufend gesendet werden kann.
+     * Creates the next request based on the accumulated conversation so far and
+     * the original settings from the first request.
+     *
+     * @param initialReq initial request used as template for fixed settings
+     * @param messages   conversation history including tool responses
+     * @return a new request ready to be sent
      */
-    private GptChatCompletionRequest buildNextRequest(GptChatCompletionRequest initialReq, List<org.json.JSONObject> messages) {
+    private GptChatCompletionRequest buildNextRequest(GptChatCompletionRequest initialReq,
+                                                      List<org.json.JSONObject> messages) {
         var builder = GptChatCompletionRequest.builder(client)
                 .model(initialReq.model())
                 .maxExecutionTimeInSeconds(initialReq.getMaxExecutionTimeInSeconds())

@@ -18,6 +18,9 @@ public enum SpeechResponseFormat {
         this.value = value;
     }
 
+    /**
+     * Returns the file format string used in the request.
+     */
     public String value() {
         return value;
     }

@@ -22,6 +22,15 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
     private final ResponseFormat responseFormat;
     private final int n; // up to 10 images
 
+    /**
+     * Creates an immutable request for the DALL·E 2 generation API.
+     *
+     * @param builder        originating builder instance
+     * @param prompt         textual prompt to generate from
+     * @param size           requested image size
+     * @param responseFormat format of the returned image URLs or data
+     * @param n              number of images to generate (1–10)
+     */
     private DallE2Request(
             Builder builder,
             String prompt,
@@ -86,6 +95,12 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
         return n;
     }
 
+    /**
+     * Returns a new builder for a DALL·E 2 request.
+     *
+     * @param client API client used to execute the request
+     * @return builder instance
+     */
     public static Builder builder(GptClient client) {
         return new Builder(client);
     }
@@ -100,39 +115,69 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
         private ResponseFormat responseFormat = ResponseFormat.URL;
         private int n = 1;
 
+        /**
+         * Creates a new builder associated with the given client.
+         * Callers obtain instances via {@link GptClient#dallE2Request()}.
+         *
+         * @param client API client used to execute the request
+         */
+        /**
+         * Creates a builder bound to the provided client.
+         */
         private Builder(GptClient client) {
             this.client = client;
         }
 
+        /**
+         * Sets the textual prompt to generate from.
+         */
         public Builder prompt(String prompt) {
             this.prompt = prompt;
             return this;
         }
 
+        /**
+         * Specifies the desired image size.
+         */
         public Builder size(ImageSize size) {
             this.size = size;
             return this;
         }
 
+        /**
+         * Sets the response format.
+         */
         public Builder responseFormat(ResponseFormat rf) {
             this.responseFormat = rf;
             return this;
         }
 
+        /**
+         * Number of images to generate (1–10).
+         */
         public Builder n(int n) {
             this.n = n;
             return this;
         }
 
+        /**
+         * Builds the request using the configured parameters.
+         */
         public DallE2Request build() {
             return new DallE2Request(this, prompt, size, responseFormat, n);
         }
 
+        /**
+         * Executes the request with exponential backoff.
+         */
         @Override
         public DallE2Response executeWithExponentialBackoff() {
             return client.sendRequest(build());
         }
 
+        /**
+         * Executes the request without retries.
+         */
         @Override
         public DallE2Response execute() {
             return client.sendRequest(build());
@@ -151,11 +196,17 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
         ImageSize(String value) {
             this.value = value;
         }
+        /**
+         * Returns the literal size used by the API.
+         */
         public String value() {
             return value;
         }
     }
 
+    /**
+     * Supported response formats for DALL·E 2 requests.
+     */
     public enum ResponseFormat {
         URL("url"),
         B64_JSON("b64_json");
@@ -164,6 +215,9 @@ public final class DallE2Request extends GptRequest<DallE2Response> {
         ResponseFormat(String value) {
             this.value = value;
         }
+        /**
+         * API string for this response format.
+         */
         public String value() {
             return value;
         }

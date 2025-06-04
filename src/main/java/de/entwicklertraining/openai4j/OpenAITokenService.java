@@ -6,10 +6,12 @@ import com.knuddels.jtokkit.api.EncodingRegistry;
 import com.knuddels.jtokkit.api.EncodingType;
 
 /**
- * Exakte Tokenzählung für OpenAI-Modelle.
- *  - Nutzt O200K_BASE (z.B. für gpt-4o) als Default.
- *  - Fällt bei Laufzeitfehlern auf eine sichere Approximation zurück
- *    (3,6 Zeichen ≈ 1 Token) und rundet auf.
+ * Utility for counting tokens for OpenAI models.
+ * <ul>
+ *   <li>Uses the {@code o200k_base} encoding (e.g. for gpt&#8209;4o) by default.</li>
+ *   <li>If tokenisation fails at runtime a safe approximation is used
+ *       (roughly 3.6 characters per token, rounded up).</li>
+ * </ul>
  */
 public final class OpenAITokenService {
 
@@ -18,10 +20,10 @@ public final class OpenAITokenService {
     private static final double AVG_CHARS_PER_TOKEN = 3.6; // leicht konservativ
 
     /**
-     * Liefert die Token-Anzahl des übergebenen Textes.
+     * Calculates the token count for the supplied text.
      *
-     * @param text Eingabetext (UTF-8)
-     * @return Anzahl Tokens (niemals lower than 0)
+     * @param text UTF‑8 input text
+     * @return number of tokens (never negative)
      */
     public int calculateTokenCount(String text) {
         if (text == null || text.isEmpty()) {

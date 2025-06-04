@@ -26,6 +26,18 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
     private final ImageStyle style;     // "vivid" or "natural"
     private final boolean noMoreDetail; // if true -> special text is prepended to the prompt
 
+    /**
+     * Constructs a request for the DALL·E 3 image generation API.
+     *
+     * @param builder       originating builder
+     * @param prompt        prompt text describing the desired image
+     * @param size          size of the generated image
+     * @param responseFormat result format (URL or base64)
+     * @param n             number of images (typically 1)
+     * @param quality       optional quality parameter
+     * @param style         optional style parameter
+     * @param noMoreDetail  if true, the prompt is prepended with a special string
+     */
     private DallE3Request(
             Builder builder,
             String prompt,
@@ -97,6 +109,12 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
         return prompt;
     }
 
+    /**
+     * Returns a new builder for a DALL·E 3 request.
+     *
+     * @param client API client used to execute the request
+     * @return builder instance
+     */
     public static Builder builder(GptClient client) {
         return new Builder(client);
     }
@@ -142,51 +160,78 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
         private ImageStyle style = null; // optional
         private boolean noMoreDetail = false;
 
+        /**
+         * Creates a builder bound to the given client. Usually obtained via
+         * {@link GptClient#dallE3Request()}.
+         *
+         * @param client API client to execute the request
+         */
+        /**
+         * Creates a builder bound to the given client.
+         */
         private Builder(GptClient client) {
             this.client = client;
         }
 
+        /**
+         * Sets the prompt describing the desired image.
+         */
         public Builder prompt(String prompt) {
             this.prompt = prompt;
             return this;
         }
 
+        /**
+         * Sets the image size to request.
+         */
         public Builder size(ImageSize size) {
             this.size = size;
             return this;
         }
 
+        /**
+         * Sets the desired response format.
+         */
         public Builder responseFormat(ResponseFormat rf) {
             this.responseFormat = rf;
             return this;
         }
 
         /**
-         * For DALL·E 3, the maximum is typically 1. Overriding is possible, but not recommended.
+         * Number of images to generate. The API typically only allows {@code 1}.
          */
         public Builder n(int n) {
             this.n = n;
             return this;
         }
 
+        /**
+         * Optional image quality setting.
+         */
         public Builder quality(ImageQuality quality) {
             this.quality = quality;
             return this;
         }
 
+        /**
+         * Optional style hint for the image.
+         */
         public Builder style(ImageStyle style) {
             this.style = style;
             return this;
         }
 
         /**
-         * If true, a caution note is prepended to the prompt so that the system does not add extra detail.
+         * If true, prepends a note to the prompt requesting no additional detail.
          */
         public Builder noMoreDetail(boolean val) {
             this.noMoreDetail = val;
             return this;
         }
 
+        /**
+         * Builds the request using the configured parameters.
+         */
         public DallE3Request build() {
             return new DallE3Request(
                     this,
@@ -200,11 +245,17 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
             );
         }
 
+        /**
+         * Executes the request with exponential backoff on retryable errors.
+         */
         @Override
         public DallE3Response executeWithExponentialBackoff() {
             return client.sendRequest(build());
         }
 
+        /**
+         * Executes the request without retries.
+         */
         @Override
         public DallE3Response execute() {
             return client.sendRequest(build());
@@ -213,6 +264,9 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
 
     // Enums for DALL·E 3
 
+    /**
+     * Supported image sizes for DALL·E 3.
+     */
     public enum ImageSize {
         SIZE_1024x1024("1024x1024"),
         SIZE_1024x1792("1024x1792"),
@@ -222,11 +276,17 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
         ImageSize(String value) {
             this.value = value;
         }
+        /**
+         * Returns the literal size value used by the API.
+         */
         public String value() {
             return value;
         }
     }
 
+    /**
+     * Quality options for generated images.
+     */
     public enum ImageQuality {
         STANDARD("standard"),
         HD("hd");
@@ -235,11 +295,17 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
         ImageQuality(String value) {
             this.value = value;
         }
+        /**
+         * API literal for image quality.
+         */
         public String value() {
             return value;
         }
     }
 
+    /**
+     * Style options controlling the visual appearance of the result.
+     */
     public enum ImageStyle {
         VIVID("vivid"),
         NATURAL("natural");
@@ -248,11 +314,17 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
         ImageStyle(String value) {
             this.value = value;
         }
+        /**
+         * API literal for image style.
+         */
         public String value() {
             return value;
         }
     }
 
+    /**
+     * Format of the API response payload.
+     */
     public enum ResponseFormat {
         URL("url"),
         B64_JSON("b64_json");
@@ -261,6 +333,9 @@ public final class DallE3Request extends GptRequest<DallE3Response> {
         ResponseFormat(String value) {
             this.value = value;
         }
+        /**
+         * String used to request the corresponding response format.
+         */
         public String value() {
             return value;
         }

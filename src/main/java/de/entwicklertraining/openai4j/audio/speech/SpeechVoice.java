@@ -21,6 +21,9 @@ public enum SpeechVoice {
         this.value = value;
     }
 
+    /**
+     * Returns the literal string expected by the API for this voice.
+     */
     public String value() {
         return value;
     }

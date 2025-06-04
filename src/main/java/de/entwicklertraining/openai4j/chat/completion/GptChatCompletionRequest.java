@@ -41,6 +41,9 @@ public final class GptChatCompletionRequest extends GptRequest<GptChatCompletion
             this.value = value;
         }
 
+        /**
+         * API literal for this service tier.
+         */
         public String getValue() {
             return value;
         }
@@ -63,6 +66,9 @@ public final class GptChatCompletionRequest extends GptRequest<GptChatCompletion
             this.literal = literal;
         }
 
+        /**
+         * Returns the string sent as the tool_choice parameter.
+         */
         public String literal() {
             return literal;
         }
@@ -79,6 +85,9 @@ public final class GptChatCompletionRequest extends GptRequest<GptChatCompletion
             this.value = value;
         }
 
+        /**
+         * Literal used for the image detail option.
+         */
         public String getValue() {
             return value;
         }
@@ -93,6 +102,9 @@ public final class GptChatCompletionRequest extends GptRequest<GptChatCompletion
             this.value = value;
         }
 
+        /**
+         * Literal used in the stream_options array.
+         */
         public String getValue() {
             return value;
         }
@@ -567,6 +579,12 @@ public final class GptChatCompletionRequest extends GptRequest<GptChatCompletion
         return new GptChatCompletionResponse(new JSONObject(responseBody), this);
     }
 
+    /**
+     * Creates a new builder for chat completion requests.
+     *
+     * @param client API client used to execute the request
+     * @return builder instance
+     */
     public static Builder builder(GptClient client) {
         return new Builder(client);
     }
@@ -607,6 +625,9 @@ public final class GptChatCompletionRequest extends GptRequest<GptChatCompletion
         private static final Set<String> ALLOWED_EXTENSIONS =
                 Set.of("jpg", "jpeg", "png", "gif", "webp");
 
+        /**
+         * Creates a builder associated with the given client.
+         */
         public Builder(GptClient client) {
             this.client = client;
         }

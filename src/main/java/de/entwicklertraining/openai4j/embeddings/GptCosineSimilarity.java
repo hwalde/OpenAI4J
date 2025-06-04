@@ -7,10 +7,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Liefert Cosine-Similarity zwischen zwei Texten, indem es Open-AI-Embeddings abruft
- * und anschließend lokal das Skalarprodukt normalisiert.
- *
- * Bei wiederholter Verwendung werden Embeddings gecacht, um Kosten zu sparen.
+ * Convenience helper to compute the cosine similarity between two texts using
+ * OpenAI embeddings.  Embedding vectors are cached so repeated calls for the
+ * same text avoid additional API requests.
  */
 public final class GptCosineSimilarity {
 
@@ -18,15 +17,23 @@ public final class GptCosineSimilarity {
     private final Map<String,double[]>        cache = new ConcurrentHashMap<>();
     private final GptClient client;
 
+    /**
+     * Creates an instance using the default embedding model.
+     */
     public GptCosineSimilarity(GptClient client) {
         this(client, EmbeddingModel.TEXT_EMBEDDING_3_SMALL);
     }
+    /**
+     * Creates an instance specifying the embedding model to use.
+     */
     public GptCosineSimilarity(GptClient client, EmbeddingModel model) {
         this.client = client;
         this.model = model;
     }
 
-    /** Cosine-Similarity zweier Texte. */
+    /**
+     * Calculates the cosine similarity of the two supplied texts.
+     */
     public double similarity(String a, String b) {
         double[] va = embeddingFor(a);
         double[] vb = embeddingFor(b);
@@ -37,7 +44,7 @@ public final class GptCosineSimilarity {
         return cosine(va, vb);
     }
 
-    /* ---------- Hilfsmethoden ---------- */
+    /* ---------- Helper methods ---------- */
 
     private double[] embeddingFor(String text) {
         return cache.computeIfAbsent(text, t -> {
@@ -61,9 +68,9 @@ public final class GptCosineSimilarity {
         return (nx == 0 || ny == 0) ? 0.0 : dot / (Math.sqrt(nx) * Math.sqrt(ny));
     }
 
-    /* Optional: Cache löschen */
+    /* Optional: clear cache */
     public void clearCache() { cache.clear(); }
 
-    /* Debug – aktuell gecachte Einträge */
+    /* Debug – current cache size */
     public int cacheSize() { return cache.size(); }
 }

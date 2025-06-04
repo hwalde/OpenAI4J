@@ -15,6 +15,9 @@ public enum TimestampGranularity {
         this.value = value;
     }
 
+    /**
+     * String value used in the request parameter.
+     */
     public String value() {
         return value;
     }
