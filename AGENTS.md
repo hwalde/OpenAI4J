@@ -31,22 +31,22 @@ Add the dependency from Maven Central:
 
 ## Basic Usage
 
-Instantiate a `GptClient` and use the builders exposed by its fluent API. The
-[function calling example](examples/src/main/java/de/entwicklertraining/openai4j/examples/GptChatCompletionWithFunctionCallingExample.java)
+Instantiate a `OpenAIClient` and use the builders exposed by its fluent API. The
+[function calling example](examples/src/main/java/de/entwicklertraining/openai4j/examples/OpenAIChatCompletionWithFunctionCallingExample.java)
 shows how tools can be defined and executed:
 
 ```java
-GptToolDefinition weatherFunction = GptToolDefinition.builder("get_local_weather")
+OpenAIToolDefinition weatherFunction = OpenAIToolDefinition.builder("get_local_weather")
         .description("Get weather information for a location.")
-        .parameter("location", GptJsonSchema.stringSchema("Name of the city"), true)
+        .parameter("location", OpenAIJsonSchema.stringSchema("Name of the city"), true)
         .callback(ctx -> {
             String loc = ctx.arguments().getString("location");
-            return GptToolResult.of("Sunny in " + loc + " with a high of 25°C.");
+            return OpenAIToolResult.of("Sunny in " + loc + " with a high of 25°C.");
         })
         .build();
 
-GptClient client = new GptClient();
-GptChatCompletionResponse resp = client.chat().completion()
+OpenAIClient client = new OpenAIClient();
+OpenAIChatCompletionResponse resp = client.chat().completion()
         .model("gpt-4o-mini")
         .addSystemMessage("You are a helpful assistant.")
         .addUserMessage("What's the weather in Berlin and the current time?")
@@ -54,13 +54,13 @@ GptChatCompletionResponse resp = client.chat().completion()
         .execute();
 System.out.println(resp.assistantMessage());
 ```
-【F:examples/src/main/java/de/entwicklertraining/openai4j/examples/GptChatCompletionWithFunctionCallingExample.java†L10-L44】
+【F:examples/src/main/java/de/entwicklertraining/openai4j/examples/OpenAIChatCompletionWithFunctionCallingExample.java†L10-L44】
 
 The [DALL·E&nbsp;3 example](examples/src/main/java/de/entwicklertraining/openai4j/examples/DallE3Example.java)
 illustrates image generation:
 
 ```java
-GptClient client = new GptClient();
+OpenAIClient client = new OpenAIClient();
 DallE3Response response = client.images().generations().dalle3()
         .prompt("A futuristic city floating in the sky, with neon lights")
         .size(ImageSize.SIZE_1024x1024)
@@ -80,27 +80,27 @@ and vision).
 
 The library follows a clear structure:
 
-* **`GptClient`** – entry point for all API calls. Extends `ApiClient` from *api-base*
+* **`OpenAIClient`** – entry point for all API calls. Extends `ApiClient` from *api-base*
   and registers error handling. It exposes sub clients (`chat()`, `images()`, `audio()`, `embeddings()`).
 * **Request/Response classes** – located in packages like
   `chat.completion`, `images.generations`, `audio.*`, `embeddings`.
-  Each request extends `GptRequest` and has an inner `Builder` that extends
-  `ApiRequestBuilderBase` from *api-base*. Responses extend `GptResponse`.
-* **Tool calling** – defined via `GptToolDefinition` and handled by
-  `GptToolsCallback` and `GptToolCallContext`.
-* **Structured outputs** – use `GptJsonSchema` and `GptResponseFormat`.
+  Each request extends `OpenAIRequest` and has an inner `Builder` that extends
+  `ApiRequestBuilderBase` from *api-base*. Responses extend `OpenAIResponse`.
+* **Tool calling** – defined via `OpenAIToolDefinition` and handled by
+  `OpenAIToolsCallback` and `OpenAIToolCallContext`.
+* **Structured outputs** – use `OpenAIJsonSchema` and `OpenAIResponseFormat`.
 * **Token utilities** – `OpenAITokenService` counts tokens via `jtokkit`.
 
 The examples directory mirrors these packages and can be used as a quick start.
 
 ## Extending OpenAI4J
 
-1. **Create a Request** – subclass `GptRequest` and implement `getRelativeUrl`,
+1. **Create a Request** – subclass `OpenAIRequest` and implement `getRelativeUrl`,
    `getHttpMethod`, `getBody` and `createResponse`. Provide a nested builder
    extending `ApiRequestBuilderBase`.
-2. **Create a Response** – subclass `GptResponse` and parse the JSON or binary
+2. **Create a Response** – subclass `OpenAIResponse` and parse the JSON or binary
    payload returned by OpenAI.
-3. **Expose a builder** – add a convenience method in `GptClient` returning your
+3. **Expose a builder** – add a convenience method in `OpenAIClient` returning your
    new builder so users can call it fluently.
 
 Thanks to *api-base*, sending the request is handled by calling
@@ -127,7 +127,7 @@ OpenAI4J is distributed under the MIT License as defined in the project `pom.xml
 This Maven-based project targets JDK 21 and provides a fluent Java wrapper around the OpenAI REST API. The main module `openai4j` exposes builders for chat completions, image generation, embeddings and audio endpoints. Example usages are located in `examples/src/main/java/de/entwicklertraining/openai4j/examples`.
 
 Important packages include:
-- `chat.completion` – classes like `GptChatCompletionRequest` and `GptChatCompletionResponse` implement the Chat Completions API.
+- `chat.completion` – classes like `OpenAIChatCompletionRequest` and `OpenAIChatCompletionResponse` implement the Chat Completions API.
 - `images.generations` – includes request builders such as `DallE3Request` for image generation.
 - `audio.*` – speech, transcription and translation requests.
 - `embeddings` – utilities for embeddings and cosine similarity.
