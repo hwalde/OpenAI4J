@@ -140,5 +140,8 @@ The project has no automated tests, but it can be compiled with `mvn package`. T
 - Keep this AGENTS.md file in sync with repository changes.
 - Only update README.md if the information becomes outdated.
 
+### Recent Changes
+* Added missing Javadoc comments across the code base to address build warnings.
+
 Wichtig: Aktualisiere AGENTS.md nach jedem Task.
 Wichtig: Aktualisiere die README.md nach jedem Task nur wenn die Informationen darin veraltet sind
