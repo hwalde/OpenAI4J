@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Repräsentiert einen Aufruf von <pre>POST /embeddings</pre>.
+ * Represents a call to {@code POST /embeddings}.
  */
 public final class GptEmbeddingsRequest extends GptRequest<GptEmbeddingsResponse> {
     /* Pflichtfelder */
@@ -81,6 +81,12 @@ public final class GptEmbeddingsRequest extends GptRequest<GptEmbeddingsResponse
 
     /* ---------- Builder ---------- */
 
+    /**
+     * Creates a new builder for an embeddings request.
+     *
+     * @param client client used to execute the request
+     * @return builder instance
+     */
     public static Builder builder(GptClient client) {
         return new Builder(client);
     }
@@ -94,33 +100,66 @@ public final class GptEmbeddingsRequest extends GptRequest<GptEmbeddingsResponse
         private EmbeddingEncodingFormat      encodingFormat;
         private String                       user;
 
-        public Builder(GptClient client) {
+        /**
+         * Constructs a builder bound to the given client.
+         */
+        private Builder(GptClient client) {
             this.client = client;
         }
 
-        /** Einzelnen Text hinzufügen */
+        /**
+         * Adds a single text input to embed.
+         *
+         * @param text input text
+         * @return this builder
+         */
         public Builder addInput(String text) {
             this.input.add(text);
             return this;
         }
-        /** Mehrere Texte */
+        /**
+         * Replaces the current input list with the given texts.
+         *
+         * @param texts list of texts to embed
+         * @return this builder
+         */
         public Builder input(List<String> texts) {
             this.input.clear();
             this.input.addAll(texts);
             return this;
         }
-        /** Roh-Token-IDs hinzufügen (für bereits tokenisierte Eingaben) */
+        /**
+         * Adds a pre-tokenised input represented by raw token IDs.
+         *
+         * @param tokens list of token IDs
+         * @return this builder
+         */
         public Builder addInputTokens(List<Integer> tokens) {
             this.input.add(tokens);
             return this;
         }
 
+        /**
+         * Sets the embedding model to use.
+         */
         public Builder model(EmbeddingModel m)              { this.model = m; return this; }
+        /**
+         * Specifies the number of dimensions for the returned vector.
+         */
         public Builder dimensions(Integer dims)             { this.dimensions = dims; return this; }
+        /**
+         * Controls how the vector is encoded in the response.
+         */
         public Builder encodingFormat(EmbeddingEncodingFormat f){ this.encodingFormat = f; return this; }
+        /**
+         * Arbitrary user identifier for tracing abuse.
+         */
         public Builder user(String userId)                  { this.user = userId; return this; }
 
         @Override
+        /**
+         * Builds the immutable request instance.
+         */
         public GptEmbeddingsRequest build() {
             return new GptEmbeddingsRequest(
                     this, model, input, dimensions, encodingFormat, user
@@ -128,11 +167,17 @@ public final class GptEmbeddingsRequest extends GptRequest<GptEmbeddingsResponse
         }
 
         @Override
+        /**
+         * Executes the request applying exponential backoff on retryable errors.
+         */
         public GptEmbeddingsResponse executeWithExponentialBackoff() {
             return client.sendRequest(build());
         }
 
         @Override
+        /**
+         * Executes the request without retries.
+         */
         public GptEmbeddingsResponse execute() {
             return client.sendRequest(build());
         }

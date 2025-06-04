@@ -18,7 +18,15 @@ import org.json.JSONObject;
  */
 public final class GptCreateTranscriptionResponse extends GptResponse<GptCreateTranscriptionRequest> {
 
-    public GptCreateTranscriptionResponse(String rawResponseBody, GptCreateTranscriptionRequest request) {
+    /**
+     * Creates a response object from the raw HTTP body returned by the API.
+     * The body may be plain text or JSON depending on the requested format.
+     *
+     * @param rawResponseBody raw response body returned by the server
+     * @param request         originating request instance
+     */
+    public GptCreateTranscriptionResponse(String rawResponseBody,
+                                          GptCreateTranscriptionRequest request) {
         super(parseToJsonSafely(rawResponseBody), request);
     }
 

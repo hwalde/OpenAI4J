@@ -19,6 +19,9 @@ public enum TranslationResponseFormat {
         this.value = value;
     }
 
+    /**
+     * Returns the literal string placed in the API request.
+     */
     public String value() {
         return value;
     }

@@ -13,6 +13,9 @@ public enum SpeechModel {
         this.value = value;
     }
 
+    /**
+     * String literal to send to the API (e.g. "tts-1").
+     */
     public String value() {
         return value;
     }

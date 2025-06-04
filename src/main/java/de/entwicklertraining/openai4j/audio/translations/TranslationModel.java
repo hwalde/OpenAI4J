@@ -13,6 +13,9 @@ public enum TranslationModel {
         this.value = value;
     }
 
+    /**
+     * Returns the model identifier used in API requests.
+     */
     public String value() {
         return value;
     }

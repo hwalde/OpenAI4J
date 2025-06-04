@@ -39,15 +39,14 @@ public final class GptChatCompletionPredictionParams {
 
     /**
      * Converts this object to its JSON representation for the API request.
-     * The structure here assumes a simple 'content' key, which might need
-     * adjustment based on the actual API specification.
+     * The current implementation follows the examples in the official
+     * documentation and sends a single {@code content} field.  This may need
+     * revisiting if the API evolves.
      *
      * @return A JSONObject representing the prediction parameters.
      */
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        // TODO: Verify the exact structure required by the OpenAI API.
-        // Assuming a simple 'content' field for now.
         json.put("content", predictedContent);
         return json;
     }

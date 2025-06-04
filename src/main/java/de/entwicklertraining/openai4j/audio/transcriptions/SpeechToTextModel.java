@@ -15,6 +15,9 @@ public enum SpeechToTextModel {
         this.value = value;
     }
 
+    /**
+     * Returns the model name as expected by the API.
+     */
     public String value() {
         return value;
     }

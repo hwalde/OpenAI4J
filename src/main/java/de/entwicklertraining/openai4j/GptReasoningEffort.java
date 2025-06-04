@@ -19,6 +19,9 @@ public enum GptReasoningEffort {
     }
 
     @JsonValue
+    /**
+     * String representation used in the API request body.
+     */
     public String getValue() {
         return value;
     }

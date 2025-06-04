@@ -17,6 +17,9 @@ public enum TranscriptionResponseFormat {
         this.value = value;
     }
 
+    /**
+     * Returns the string literal used in requests.
+     */
     public String value() {
         return value;
     }
