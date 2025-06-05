@@ -142,6 +142,7 @@ The project has no automated tests, but it can be compiled with `mvn package`. T
 
 ### Recent Changes
 * Added missing Javadoc comments across the code base to address build warnings.
+* Added an important notice at the beginning of README about supported OpenAI features.
 
 Wichtig: Aktualisiere AGENTS.md nach jedem Task.
 Wichtig: Aktualisiere die README.md nach jedem Task nur wenn die Informationen darin veraltet sind

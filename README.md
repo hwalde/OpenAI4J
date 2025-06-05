@@ -1,5 +1,11 @@
 # OpenAI4J
 
+> **⚠️ Important Notice**
+>
+> I created this library because I was looking for a Java library that interacts with the OpenAI API while staying as close to the raw API as possible—the official Java library does not. This implementation is fully compatible with OpenAI but only includes the features I personally require. I maintain similar libraries for DeepSeek and Gemini, each in its own repository so usage remains explicit. Everything supported by the Java API works here.
+> 
+> At the moment the library only covers the parts I need. Chat Completions are implemented with nearly every option, but many specialized endpoints—like Fine Tuning or Evals—are missing. If you need additional functionality, feel free to implement it yourself or submit a pull request and I will consider adding it.
+
 OpenAI4J is a fluent Java wrapper for the [OpenAI API](https://platform.openai.com/docs/api-reference).
 It builds on top of the lightweight [`api-base`](https://github.com/hwalde/api-base) library which
 handles HTTP communication, authentication and exponential backoff. The goal is to provide a type safe
