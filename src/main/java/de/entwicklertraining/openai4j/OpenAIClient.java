@@ -40,8 +40,9 @@ public final class OpenAIClient extends ApiClient {
 
         setBaseUrl(customBaseUrl);
 
-        if(!settings.getBearerAuthenticationKey().isPresent()) {
-            settings = settings.toBuilder().setBearerAuthenticationKey("TEST").build();
+        // if no API key is provided, try to read it from the environment variable
+        if(settings.getBearerAuthenticationKey().isEmpty() && System.getenv("OPENAI_API_KEY")!=null) {
+            this.settings = this.settings.toBuilder().setBearerAuthenticationKey(System.getenv("OPENAI_API_KEY")).build();
         }
 
         /* Fehler­code-Registrierungen wie bisher */
