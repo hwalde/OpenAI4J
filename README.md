@@ -78,8 +78,32 @@ List<String> images = response.images();
 ```
 【F:examples/src/main/java/de/entwicklertraining/openai4j/examples/DallE3Example.java†L26-L43】
 
-See the `examples` module for more demonstrations (embeddings, speech, translation, web search
-and vision).
+### Configuring the Client
+
+`OpenAIClient` accepts an `ApiClientSettings` object for fine‑grained control over retries and timeouts. The API key can be configured directly and a hook can inspect each request before it is sent:
+
+```java
+ApiClientSettings settings = ApiClientSettings.builder()
+        .setBearerAuthenticationKey(System.getenv("OPENAI_API_KEY"))
+        .beforeSend(req -> System.out.println("Sending " + req.getHttpMethod() + " " + req.getRelativeUrl()))
+        .build();
+
+OpenAIClient client = new OpenAIClient(settings);
+```
+
+### Embeddings Example
+
+```java
+OpenAIClient client = new OpenAIClient();
+OpenAIEmbeddingsResponse emb = client.embeddings()
+        .model(EmbeddingModel.TEXT_EMBEDDING_3_SMALL)
+        .addInput("OpenAI provides powerful language models.")
+        .addInput("Large language models are offered by OpenAI.")
+        .execute();
+List<double[]> vecs = emb.embeddingsFloat();
+```
+
+See the `examples` module for more demonstrations (speech, translation, web search and vision).
 
 ## Project Structure
 
