@@ -2,9 +2,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>openai4j</artifactId>
-  <packaging>jar</packaging>
-
   <parent>
     <groupId>de.entwicklertraining</groupId>
     <artifactId>openai4j-project</artifactId>
@@ -12,41 +9,78 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
+  <artifactId>openai4j</artifactId>
+  <packaging>jar</packaging>
+
   <name>OpenAI4J</name>
   <description>Fluent API Java Library for OpenAI</description>
+  <url>http://github.com/hwalde/OpenAI4J</url> <licenses>
+  <license>
+    <name>MIT License</name>
+    <url>https://opensource.org/licenses/MIT</url>
+    <distribution>repo</distribution>
+  </license>
+</licenses>
+
+  <developers>
+    <developer>
+      <id>hwalde</id>
+      <name>Herbert Walde</name>
+      <email>info@entwickler-training.de</email>
+      <url>https://entwickler-training.de</url>
+      <organization>Herbert Walde Einzelunternehmen</organization>
+      <organizationUrl>https://entwickler-training.de</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/hwalde/OpenAI4J.git</connection>
+    <developerConnection>scm:git:ssh://github.com:hwalde/OpenAI4J.git</developerConnection>
+    <url>http://github.com/hwalde/OpenAI4J/tree/master</url>
+  </scm>
+
   <dependencies>
     <dependency>
       <groupId>de.entwicklertraining</groupId>
       <artifactId>api-base</artifactId>
+      <version>${api-base.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
+      <version>${json-java.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
     </dependency>
 
     <dependency>
       <groupId>com.knuddels</groupId>
       <artifactId>jtokkit</artifactId>
+      <version>${jtokkit.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -58,7 +92,8 @@
         <executions>
           <execution>
             <id>attach-sources</id>
-            <goals><goal>jar-no-fork</goal></goals> </execution>
+            <goals><goal>jar-no-fork</goal></goals>
+          </execution>
         </executions>
       </plugin>
 
@@ -85,6 +120,11 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
