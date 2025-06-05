@@ -84,7 +84,7 @@ List<String> images = response.images();
 
 ```java
 ApiClientSettings settings = ApiClientSettings.builder()
-        .setBearerAuthenticationKey(System.getenv("OPENAI_API_KEY"))
+        .setBearerAuthenticationKey("my api key")
         .beforeSend(req -> System.out.println("Sending " + req.getHttpMethod() + " " + req.getRelativeUrl()))
         .build();
 
