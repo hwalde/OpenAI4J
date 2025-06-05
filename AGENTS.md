@@ -24,7 +24,7 @@ Add the dependency from Maven Central:
 ```xml
 <dependency>
     <groupId>de.entwicklertraining</groupId>
-    <artifactId>openapi4j</artifactId>
+    <artifactId>openai4j</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -45,7 +45,8 @@ OpenAIToolDefinition weatherFunction = OpenAIToolDefinition.builder("get_local_w
         })
         .build();
 
-OpenAIClient client = new OpenAIClient();
+OpenAIClient client = new OpenAIClient(); // this will read the API key from the environment variable OPENAI_API_KEY
+
 OpenAIChatCompletionResponse resp = client.chat().completion()
         .model("gpt-4o-mini")
         .addSystemMessage("You are a helpful assistant.")
