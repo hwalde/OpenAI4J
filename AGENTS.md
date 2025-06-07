@@ -149,6 +149,8 @@ The project has no automated tests, but it can be compiled with `mvn package`. T
 * Expanded README with new examples including ApiClientSettings usage and embeddings.
 * Introduced new submodule `openai4j-audio-service` with helpers for chunking audio and creating SRT/VTT files.
 * Bumped project version to 1.1.0.
+* Fixed broken Javadoc links in OpenAITranscribeAudioService.
+* Documented the optional audio-service module and updated the README with an Optional Modules section.
 
 Wichtig: Aktualisiere AGENTS.md nach jedem Task.
 Wichtig: Aktualisiere die README.md nach jedem Task nur wenn die Informationen darin veraltet sind

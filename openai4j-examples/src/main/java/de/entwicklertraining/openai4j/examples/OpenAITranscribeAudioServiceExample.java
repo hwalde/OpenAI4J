@@ -13,6 +13,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+/**
+ * Demonstrates the {@code OpenAITranscribeAudioService}.
+ * To run this example you need to include the optional
+ * {@code openai4j-audio-service} dependency in your project.
+ */
 public class OpenAITranscribeAudioServiceExample {
 
     public static void main(String[] args) throws Exception {
