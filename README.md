@@ -34,6 +34,17 @@ Add the dependency from Maven Central:
 </dependency>
 ```
 
+## Optional Modules
+
+This repository contains additional modules that build on top of the core
+library. They are not required but provide convenient helpers for certain
+tasks.
+
+* **`openai4j-audio-service`** – automatically chunks large audio files and
+  merges multiple Whisper transcriptions. See the
+  [OpenAITranscribeAudioServiceExample.java](openai4j-examples/src/main/java/de/entwicklertraining/openai4j/examples/OpenAITranscribeAudioServiceExample.java)
+  for a usage example.
+
 ## Basic Usage
 
 Instantiate a `OpenAIClient` and use the builders exposed by its fluent API. The
