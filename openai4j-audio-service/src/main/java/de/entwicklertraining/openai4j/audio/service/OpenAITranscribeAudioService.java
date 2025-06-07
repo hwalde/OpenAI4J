@@ -103,7 +103,7 @@ public final class OpenAITranscribeAudioService {
 
     /**
      * Transcribe audio to a {@link VerboseTranscription}, merging chunk results
-     * via {@link OpenAIVerboseTranscriptionService(VerboseTranscription...)}.
+     * via {@link OpenAIVerboseTranscriptionService#combine(VerboseTranscription...)}.
      */
     public VerboseTranscription transcribeAudioToVerboseTranscription(Path filePath) {
         return transcribeAudioToVerboseTranscription(filePath, new TranscriptionSettings());
@@ -111,7 +111,7 @@ public final class OpenAITranscribeAudioService {
 
     /**
      * Transcribe audio to a {@link VerboseTranscription}, merging chunk results
-     * via {@link OpenAIVerboseTranscriptionService(VerboseTranscription...)}.
+     * via {@link OpenAIVerboseTranscriptionService#combine(VerboseTranscription...)}.
      */
     public VerboseTranscription transcribeAudioToVerboseTranscription(Path filePath, TranscriptionSettings settings) {
         List<VerboseTranscription> transcriptions =
