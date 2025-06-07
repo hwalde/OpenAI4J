@@ -25,7 +25,7 @@ public class OpenAITranscribeAudioServiceExample {
 
         // Adjust the path to your local audio file.
         // This can be e.g. an .mp3 or .m4a, etc.
-        Path sampleAudio = Path.of("C:\\Users\\herbe\\Meine Geschichte Teil 1.wav");
+        Path sampleAudio = Path.of("openai4j-examples/src/main/resources/hello-world.wav");
 
         // Define output file path
         Path outputFile = Paths.get("transcription_output.txt");

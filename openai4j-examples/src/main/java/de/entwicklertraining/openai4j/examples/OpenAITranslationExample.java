@@ -13,7 +13,7 @@ public class OpenAITranslationExample {
 
     public static void main(String[] args) {
         // Adjust this path to your local audio file if needed
-        Path audioFile = Path.of("src/main/resources/audio/deutsch-kurz.wav");
+        Path audioFile = Path.of("openai4j-examples/src/main/resources/hallo-welt.wav");
 
         // Generate OpenAIClient
         OpenAIClient client = new OpenAIClient();

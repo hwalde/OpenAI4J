@@ -52,26 +52,31 @@
     <dependency>
       <groupId>be.tarsos.dsp</groupId>
       <artifactId>core</artifactId>
+      <version>${tarsos.version}</version>
     </dependency>
     <dependency>
       <groupId>be.tarsos.dsp</groupId>
       <artifactId>jvm</artifactId>
+      <version>${tarsos.version}</version>
     </dependency>
 
     <!-- JAVE2 for audio encoding -->
     <dependency>
       <groupId>ws.schild</groupId>
       <artifactId>jave-core</artifactId>
+      <version>${jave.version}</version>
     </dependency>
     <dependency>
       <groupId>ws.schild</groupId>
       <artifactId>jave-all-deps</artifactId>
+      <version>${jave.version}</version>
     </dependency>
 
     <!-- Commons IO for FileUtils -->
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
+      <version>${commons-io.version}</version>
     </dependency>
   </dependencies>
 

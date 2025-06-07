@@ -64,7 +64,7 @@ public final class OpenAITranscribeAudioService {
      * with optional settings for temperature, language, etc.
      */
     public String transcribeAudioToText(Path filePath, TranscriptionSettings settings) {
-        List<String> chunkOutputs = transcribeMultipleChunks(filePath, settings, TranscriptionResponseFormat.JSON);
+        List<String> chunkOutputs = transcribeMultipleChunks(filePath, settings, TranscriptionResponseFormat.VERBOSE_JSON);
         return String.join(" ", chunkOutputs);
     }
 

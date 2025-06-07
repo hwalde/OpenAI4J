@@ -8,7 +8,6 @@ import java.nio.file.Path;
 
 /**
  * Demonstrates how to use Vision with a local image (base64 encoded).
- * The image is located at "src/main/resources/images/AboutMe.jpg".
  * We pass it to the model with "detail=auto" and ask what is in the image.
  */
 public class OpenAIChatCompletionWithVisionBase64Example {
@@ -23,7 +22,7 @@ public class OpenAIChatCompletionWithVisionBase64Example {
                 .addSystemMessage("You are a helpful assistant that can analyze images.")
                 .addUserMessage("Please describe the following photo:")
                 // Using the newly created method addImageByBase64
-                .addImageByBase64(Path.of("src", "main", "resources", "images", "AboutMe.jpg"),
+                .addImageByBase64(Path.of("openai4j-examples/src/main/resources/image.jpg"),
                         OpenAIChatCompletionRequest.ImageDetail.AUTO)
                 .execute();
 

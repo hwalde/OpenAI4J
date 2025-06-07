@@ -21,7 +21,7 @@ public class OpenAISpeechExample {
         // 1) Build and execute a TTS request
         OpenAICreateSpeechResponse response = client.audio().speech()
                 .model(SpeechModel.TTS_1_HD)    // or TTS_1
-                .input("Willkommen zur KVB Schulung - Tag 3")
+                .input("This is an example from OpenAI4J.")
                 .voice(SpeechVoice.ALLOY)
                 .responseFormat(SpeechResponseFormat.MP3) // default is MP3 anyway
                 .speed(1.0)  // a bit faster than normal
