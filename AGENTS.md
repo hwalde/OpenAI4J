@@ -151,6 +151,7 @@ The project has no automated tests, but it can be compiled with `mvn package`. T
 * Bumped project version to 1.1.0.
 * Fixed broken Javadoc links in OpenAITranscribeAudioService.
 * Documented the optional audio-service module and updated the README with an Optional Modules section.
+* Added CHANGELOG summarizing version history.
 
 Wichtig: Aktualisiere AGENTS.md nach jedem Task.
 Wichtig: Aktualisiere die README.md nach jedem Task nur wenn die Informationen darin veraltet sind
