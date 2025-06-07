@@ -17,7 +17,7 @@ and convenient way to access OpenAI services from Java, being as close to the ra
 * Chat Completions including tool calling, structured outputs and vision inputs
 * Image generation with GPT-4o's `image-1`, DALL·E&nbsp;2 and DALL·E&nbsp;3
 * Embeddings with helper for cosine similarity
-* Speech synthesis (TTS), audio transcription and translation + plus a service that chunks audio input for you
+* Speech synthesis (TTS), audio transcription and translation, plus a service to chunk and merge audio files
 * Token counting utilities via `jtokkit`
 * Fluent builder APIs for all requests
 * Examples demonstrating each feature
@@ -30,7 +30,7 @@ Add the dependency from Maven Central:
 <dependency>
     <groupId>de.entwicklertraining</groupId>
     <artifactId>openai4j</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -130,6 +130,7 @@ The library follows a clear structure:
   `OpenAIToolsCallback` and `OpenAIToolCallContext`.
 * **Structured outputs** – use `OpenAIJsonSchema` and `OpenAIResponseFormat`.
 * **Token utilities** – `OpenAITokenService` counts tokens via `jtokkit`.
+* **Audio services** – submodule `openai4j-audio-service` provides helpers for chunking files and merging transcriptions.
 
 The examples directory mirrors these packages and can be used as a quick start.
 
