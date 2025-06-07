@@ -4,7 +4,7 @@
 
   <groupId>de.entwicklertraining</groupId>
   <artifactId>openai4j-project</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <packaging>pom</packaging>
 
   <name>OpenAI4J (Project)</name>
@@ -14,7 +14,20 @@
   <modules>
     <module>openai4j</module>
     <module>openai4j-examples</module>
+    <module>openai4j-audio-service</module>
   </modules>
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+    <repository>
+      <id>be.0110.repo-releases</id>
+      <name>0110.be repository</name>
+      <url>https://mvn.0110.be/releases</url>
+    </repository>
+  </repositories>
 
   <licenses>
     <license>
@@ -52,6 +65,9 @@
     <jtokkit.version>1.1.0</jtokkit.version>
     <api-base.version>1.0.4</api-base.version>
     <json-java.version>20240303</json-java.version>
+    <tarsos.version>2.5</tarsos.version>
+    <jave.version>3.5.0</jave.version>
+    <commons-io.version>2.19.0</commons-io.version>
 
     <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
@@ -119,6 +135,34 @@
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-slf4j2-impl</artifactId>
         <version>${log4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>be.tarsos.dsp</groupId>
+        <artifactId>core</artifactId>
+        <version>${tarsos.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>be.tarsos.dsp</groupId>
+        <artifactId>jvm</artifactId>
+        <version>${tarsos.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ws.schild</groupId>
+        <artifactId>jave-core</artifactId>
+        <version>${jave.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ws.schild</groupId>
+        <artifactId>jave-all-deps</artifactId>
+        <version>${jave.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

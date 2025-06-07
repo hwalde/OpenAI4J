@@ -9,18 +9,19 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>openai4j</artifactId>
+  <artifactId>openai4j-audio-service</artifactId>
   <packaging>jar</packaging>
 
-  <name>OpenAI4J</name>
-  <description>Fluent API Java Library for OpenAI</description>
-  <url>http://github.com/hwalde/OpenAI4J</url> <licenses>
-  <license>
-    <name>MIT License</name>
-    <url>https://opensource.org/licenses/MIT</url>
-    <distribution>repo</distribution>
-  </license>
-</licenses>
+  <name>OpenAI4J - Audio Service</name>
+  <description>Adds an audio service to OpenAI4J</description>
+  <url>http://github.com/hwalde/OpenAI4J/tree/master/openai4j-audio-service</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <developers>
     <developer>
@@ -40,47 +41,37 @@
   </scm>
 
   <dependencies>
+    <!-- OpenAI4J -->
     <dependency>
       <groupId>de.entwicklertraining</groupId>
-      <artifactId>api-base</artifactId>
-      <version>${api-base.version}</version>
+      <artifactId>OpenAI4J</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
+    <!-- TarsosDSP -->
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>${jackson.version}</version>
+      <groupId>be.tarsos.dsp</groupId>
+      <artifactId>core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>be.tarsos.dsp</groupId>
+      <artifactId>jvm</artifactId>
     </dependency>
 
+    <!-- JAVE2 for audio encoding -->
     <dependency>
-      <groupId>org.json</groupId>
-      <artifactId>json</artifactId>
-      <version>${json-java.version}</version>
+      <groupId>ws.schild</groupId>
+      <artifactId>jave-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ws.schild</groupId>
+      <artifactId>jave-all-deps</artifactId>
     </dependency>
 
+    <!-- Commons IO for FileUtils -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${slf4j.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.knuddels</groupId>
-      <artifactId>jtokkit</artifactId>
-      <version>${jtokkit.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
     </dependency>
   </dependencies>
 

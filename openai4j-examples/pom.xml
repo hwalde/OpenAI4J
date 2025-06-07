@@ -6,15 +6,15 @@
     <parent>
         <groupId>de.entwicklertraining</groupId>
         <artifactId>openai4j-project</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>openai4j-examples</artifactId>
     <packaging>jar</packaging>
 
-    <name>OpenAI4j - Examples</name>
-    <description>Examples for the OpenAI4j library</description>
+    <name>OpenAI4J - Examples</name>
+    <description>Examples for the OpenAI4J library</description>
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
@@ -23,6 +23,11 @@
         <dependency>
             <groupId>de.entwicklertraining</groupId>
             <artifactId>openai4j</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.entwicklertraining</groupId>
+            <artifactId>openai4j-audio-service</artifactId>
             <version>${project.version}</version>
         </dependency>
 
