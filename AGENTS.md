@@ -146,6 +146,7 @@ The project has no automated tests, but it can be compiled with `mvn package`. T
 * Added an important notice at the beginning of README about supported OpenAI features.
 * Expanded README with new examples including ApiClientSettings usage and embeddings.
 * Fixed broken Javadoc links in OpenAITranscribeAudioService.
+* Documented the optional audio-service module and updated the README with an Optional Modules section.
 
 Wichtig: Aktualisiere AGENTS.md nach jedem Task.
 Wichtig: Aktualisiere die README.md nach jedem Task nur wenn die Informationen darin veraltet sind
