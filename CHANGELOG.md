@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2] - 2025-06-18
+### Fixed
+- Added missing main project to Maven Central repository
+
+## [1.1.1] - 2025-06-18
+### Added
+- Token counting functionality via `tokenCounter()` method in OpenAIClient
+- Preferred model selection support in audio transcription settings
+
+### Changed
+- Default transcription response format changed from VERBOSE_JSON to JSON for better compatibility
+- Audio service now uses getter methods instead of direct field access for better encapsulation
+- Simplified audio transcription example by removing timestamp granularities
+
+### Fixed
+- Improved field access patterns in TranscriptionSettings for better code quality
+
 ## [1.1.0] - 2025-06-07
 ### Added
 - Optional audio service module providing helpers for chunking audio and merging transcriptions.
