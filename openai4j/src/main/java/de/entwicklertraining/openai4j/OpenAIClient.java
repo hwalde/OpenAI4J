@@ -12,6 +12,7 @@ import de.entwicklertraining.openai4j.images.generations.OpenAIImage1Request;
 import de.entwicklertraining.api.base.ApiClientSettings;
 
 import java.util.Optional;
+import java.util.function.ToIntFunction;
 
 /**
  * Enhanced OpenAIClient with improved error handling and exponential backoff
@@ -27,6 +28,7 @@ import java.util.Optional;
  *   - else -> throw ApiClient.ApiClientException
  */
 public final class OpenAIClient extends ApiClient {
+
     public OpenAIClient() {
         this(ApiClientSettings.builder().build(), "https://api.openai.com/v1");
     }
@@ -132,5 +134,9 @@ public final class OpenAIClient extends ApiClient {
 
     public OpenAIEmbeddingsRequest.Builder embeddings() {
         return OpenAIEmbeddingsRequest.builder(this);
+    }
+
+    public ToIntFunction<String> tokenCounter() {
+        return new OpenAITokenService()::calculateTokenCount;
     }
 }

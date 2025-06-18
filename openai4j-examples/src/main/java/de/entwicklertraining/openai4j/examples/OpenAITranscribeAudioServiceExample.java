@@ -66,8 +66,7 @@ public class OpenAITranscribeAudioServiceExample {
             TranscriptionSettings settings = new TranscriptionSettings()
                     .setLanguage("en")                     // e.g. "en", "de", "es"...
                     .setTemperature(0.2)                   // for more variety in the transcription
-                    .setPrompt("Context for the conversation, e.g. 'It's an interview.'")
-                    .setTimestampGranularities(Arrays.asList(TimestampGranularity.WORD));
+                    .setPrompt("Context for the conversation, e.g. 'It's an interview.'");
 
             String textWithSettings = OpenAITranscribeAudioService.getInstance().transcribeAudioToText(sampleAudio, settings);
             writer.write("=== Transcription With Custom Settings ===\n");

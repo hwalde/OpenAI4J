@@ -64,7 +64,7 @@ public final class OpenAITranscribeAudioService {
      * with optional settings for temperature, language, etc.
      */
     public String transcribeAudioToText(Path filePath, TranscriptionSettings settings) {
-        List<String> chunkOutputs = transcribeMultipleChunks(filePath, settings, TranscriptionResponseFormat.VERBOSE_JSON);
+        List<String> chunkOutputs = transcribeMultipleChunks(filePath, settings, TranscriptionResponseFormat.JSON);
         return String.join(" ", chunkOutputs);
     }
 
@@ -263,21 +263,21 @@ public final class OpenAITranscribeAudioService {
 
         // For gpt-4o-transcribe and gpt-4o-mini-transcribe, the only supported format is json.
         if(format.equals(TranscriptionResponseFormat.JSON)) {
-            builder.model(SpeechToTextModel.GPT_4o_MINI_TRANSCRIBE);
+            builder.model(Objects.requireNonNullElse(settings.getPreferredModel(), SpeechToTextModel.GPT_4o_MINI_TRANSCRIBE));
         } else {
             builder.model(SpeechToTextModel.WHISPER_1);
         }
 
-        if (settings.temperature != null) {
-            builder.temperature(settings.temperature);
+        if (settings.getTemperature() != null) {
+            builder.temperature(settings.getTemperature());
         }
-        if (settings.language != null && !settings.language.isBlank()) {
-            builder.language(settings.language);
+        if (settings.getLanguage() != null && !settings.getLanguage().isBlank()) {
+            builder.language(settings.getLanguage());
         }
-        if (settings.prompt != null && !settings.prompt.isBlank()) {
-            builder.prompt(settings.prompt);
+        if (settings.getPrompt() != null && !settings.getPrompt().isBlank()) {
+            builder.prompt(settings.getPrompt());
         }
-        if (settings.timestampGranularities != null && !settings.timestampGranularities.isEmpty()) {
+        if (settings.getTimestampGranularities() != null && !settings.getTimestampGranularities().isEmpty()) {
             builder.timestampGranularities(settings.timestampGranularities);
         }
         return builder;
@@ -291,6 +291,7 @@ public final class OpenAITranscribeAudioService {
         private String language;
         private String prompt;
         private List<TimestampGranularity> timestampGranularities;
+        private SpeechToTextModel preferredModel;
 
         public Double getTemperature() {
             return temperature;
@@ -321,6 +322,14 @@ public final class OpenAITranscribeAudioService {
         }
         public TranscriptionSettings setTimestampGranularities(List<TimestampGranularity> timestampGranularities) {
             this.timestampGranularities = timestampGranularities;
+            return this;
+        }
+
+        public SpeechToTextModel getPreferredModel() {
+            return preferredModel;
+        }
+        public TranscriptionSettings setPreferredModel(SpeechToTextModel preferredModel) {
+            this.preferredModel = preferredModel;
             return this;
         }
     }
