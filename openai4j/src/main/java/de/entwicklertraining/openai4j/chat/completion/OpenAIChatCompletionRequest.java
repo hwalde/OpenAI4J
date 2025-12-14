@@ -1384,6 +1384,11 @@ public final class OpenAIChatCompletionRequest extends OpenAIRequest<OpenAIChatC
                 throw new IllegalStateException("logprobs must be set to true when using top_logprobs");
             }
 
+            // If streaming is enabled via api-base StreamingInfo, also set the stream flag for JSON body
+            if (getStreamingInfo() != null && getStreamingInfo().isEnabled()) {
+                this.stream = true;
+            }
+
             List<JSONObject> messagesCopy = new ArrayList<>(List.copyOf(messages));
             messagesCopy.addAll(imageMessages);
             return new OpenAIChatCompletionRequest(

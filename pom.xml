@@ -4,7 +4,7 @@
 
   <groupId>de.entwicklertraining</groupId>
   <artifactId>openai4j-project</artifactId>
-  <version>1.1.2</version>
+  <version>1.2.0</version>
   <packaging>pom</packaging>
 
   <name>OpenAI4J (Project)</name>
@@ -62,7 +62,7 @@
     <log4j.version>2.24.3</log4j.version>
     <jackson.version>2.19.0</jackson.version>
     <jtokkit.version>1.1.0</jtokkit.version>
-    <api-base.version>1.0.4</api-base.version>
+    <api-base.version>2.2.0</api-base.version>
     <json-java.version>20240303</json-java.version>
     <tarsos.version>2.5</tarsos.version>
     <jave.version>3.5.0</jave.version>

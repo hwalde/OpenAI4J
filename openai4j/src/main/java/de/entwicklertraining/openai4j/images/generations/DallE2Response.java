@@ -31,9 +31,11 @@ public final class DallE2Response extends OpenAIResponse<DallE2Request> {
         if (dataArr == null || dataArr.isEmpty()) {
             return;
         }
+        @SuppressWarnings("unchecked")
+        DallE2Request typedRequest = (DallE2Request) getRequest();
         for (int i = 0; i < dataArr.length(); i++) {
             JSONObject entry = dataArr.getJSONObject(i);
-            if (getRequest().responseFormat() == DallE2Request.ResponseFormat.URL) {
+            if (typedRequest.responseFormat() == DallE2Request.ResponseFormat.URL) {
                 images.add(entry.getString("url"));
             } else {
                 images.add(entry.getString("b64_json"));

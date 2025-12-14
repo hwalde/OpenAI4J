@@ -34,8 +34,10 @@ public final class OpenAIEmbeddingsResponse extends OpenAIResponse<OpenAIEmbeddi
 
         // parse embeddings
         JSONArray data = json.getJSONArray("data");
-        boolean floats = request.encodingFormat() == null ||
-                         request.encodingFormat() == EmbeddingEncodingFormat.FLOAT;
+        @SuppressWarnings("unchecked")
+        OpenAIEmbeddingsRequest typedRequest = (OpenAIEmbeddingsRequest) getRequest();
+        boolean floats = typedRequest.encodingFormat() == null ||
+                         typedRequest.encodingFormat() == EmbeddingEncodingFormat.FLOAT;
 
         for (int i = 0; i < data.length(); i++) {
             JSONObject entry = data.getJSONObject(i);

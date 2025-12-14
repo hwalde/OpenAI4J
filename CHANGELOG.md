@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-12-14
+### Added
+- Streaming support for Chat Completions using Server-Sent Events (SSE)
+- New `stream()` method on ChatCompletionRequestBuilder for enabling streaming responses
+- `StreamingChatCompletionExample` demonstrating real-time streaming output
+
+### Changed
+- Updated api-base dependency to 2.2.0 (adds streaming infrastructure)
+
 ## [1.1.2] - 2025-06-18
 ### Fixed
 - Added missing main project to Maven Central repository
